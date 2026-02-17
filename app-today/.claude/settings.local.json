@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m http.server:*)",
+      "Bash(curl:*)",
+      "Bash(python:*)",
+      "Bash(node --version:*)",
+      "Bash(kill:*)",
+      "Bash(node -e:*)",
+      "Bash(node:*)",
+      "Bash(netstat:*)",
+      "Bash(ss:*)",
+      "Bash(taskkill:*)",
+      "Bash(npx vercel --version)",
+      "Bash(vercel:*)",
+      "Bash(VERCEL_ORG_ID=team_jAljPJUqJ0Uz4rTqbZfWS5Wd vercel link:*)",
+      "Bash(VERCEL_SCOPE=chancenotes-projects vercel deploy:*)"
+    ]
+  }
+}

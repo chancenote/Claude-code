@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(findstr:*)",
+      "Bash(python -m pip install:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(node generate-curriculum.js:*)",
+      "Bash(start \"\" \"C:\\\\Claude-code\\\\excel-claude-code\\\\Claude_Code_30Day_Curriculum.xlsx\")",
+      "WebFetch(domain:www.traversymedia.com)",
+      "Bash(start \"\" \"C:\\\\Claude-code\\\\excel-claude-code\\\\index.html\")",
+      "Bash(where:*)",
+      "Bash(npx vercel:*)",
+      "Bash(copy:*)",
+      "Bash(vercel:*)",
+      "Bash(set \"VERCEL_ORG_ID=team_jAljPJUqJ0Uz4rTqbZfWS5Wd\")"
+    ]
+  }
+}
