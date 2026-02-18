@@ -2,9 +2,16 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "LEESLE Norigae Workshop",
+  title: "LEESLE | Norigae Making Experience",
   description:
-    "Book a traditional Korean Norigae making experience at LEESLE",
+    "Book a traditional Korean Norigae making experience at LEESLE. Create your own handcrafted accessory with expert artisans.",
+  openGraph: {
+    title: "LEESLE | Norigae Making Experience",
+    description:
+      "Create your own traditional Korean Norigae accessory with our expert artisans.",
+    siteName: "LEESLE",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -26,7 +33,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-white text-charcoal min-h-screen font-body">
+      <body className="bg-warm-white text-charcoal min-h-screen font-body antialiased">
         {children}
       </body>
     </html>

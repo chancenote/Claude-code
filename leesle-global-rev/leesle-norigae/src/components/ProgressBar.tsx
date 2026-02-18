@@ -19,36 +19,57 @@ export default function ProgressBar({ currentStep }: ProgressBarProps) {
   if (currentStep > 3) return null;
 
   return (
-    <div className="flex items-center justify-center gap-0 mb-10">
-      {STEPS.map((step, i) => (
-        <div key={step.num} className="flex items-center">
-          {/* Step circle + label */}
-          <div className="flex items-center">
-            <div
-              className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${
-                step.num <= currentStep
-                  ? "bg-primary text-white"
-                  : "bg-gray-light text-charcoal/50"
-              }`}
-            >
-              {step.num}
+    <div className="flex items-center justify-center mb-12">
+      {STEPS.map((step, i) => {
+        const isActive = step.num <= currentStep;
+        const isCurrent = step.num === currentStep;
+
+        return (
+          <div key={step.num} className="flex items-center">
+            <div className="flex flex-col items-center gap-1.5">
+              {/* Step circle */}
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
+                  isActive
+                    ? "bg-primary text-white shadow-sm"
+                    : "border-1.5 border-gray-light text-gray-muted bg-white"
+                } ${isCurrent ? "ring-4 ring-primary/10" : ""}`}
+              >
+                {isActive && step.num < currentStep ? (
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                ) : (
+                  step.num
+                )}
+              </div>
+              {/* Label */}
+              <span
+                className={`text-[11px] font-medium tracking-wide hidden sm:block transition-colors ${
+                  isActive ? "text-primary" : "text-gray-muted"
+                }`}
+              >
+                {t(step.labelKey)}
+              </span>
             </div>
-            <span className="ml-2 text-sm font-medium hidden sm:inline">
-              {t(step.labelKey)}
-            </span>
+
+            {/* Connector line */}
+            {i < STEPS.length - 1 && (
+              <div className="w-16 sm:w-24 h-px mx-3 sm:mx-4 mb-5 sm:mb-5">
+                <div
+                  className="h-full transition-all duration-500"
+                  style={{
+                    background:
+                      step.num < currentStep
+                        ? "#000000"
+                        : "#e5e5e5",
+                  }}
+                />
+              </div>
+            )}
           </div>
-          {/* Connector line (not after last step) */}
-          {i < STEPS.length - 1 && (
-            <div
-              className="w-10 sm:w-16 h-0.5 mx-2 transition-colors"
-              style={{
-                backgroundColor:
-                  step.num < currentStep ? "#000000" : "#e5e5e5",
-              }}
-            />
-          )}
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

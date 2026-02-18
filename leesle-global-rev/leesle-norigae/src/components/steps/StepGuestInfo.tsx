@@ -29,64 +29,76 @@ export default function StepGuestInfo({
   const { t } = useTranslation();
 
   return (
-    <div className="animate-fadeIn">
-      <h2 className="font-heading text-xl font-bold mb-6">{t("step2_title")}</h2>
+    <div className="step-section">
+      <h2 className="font-heading text-xl font-bold mb-8">{t("step2_title")}</h2>
 
-      <div className="space-y-5">
-        <TextInput
-          label={t("label_name")}
-          required
-          value={formData.guestName}
-          onChange={(v) => onFormChange({ guestName: v })}
-          placeholder={t("ph_name")}
-          error={errors.name}
-        />
+      <div className="bg-white rounded-2xl p-5 sm:p-8 shadow-sm border border-gray-light/60">
+        <div className="space-y-6">
+          <TextInput
+            label={t("label_name")}
+            required
+            value={formData.guestName}
+            onChange={(v) => onFormChange({ guestName: v })}
+            placeholder={t("ph_name")}
+            error={errors.name}
+          />
 
-        <TextInput
-          label={t("label_email")}
-          required
-          type="email"
-          value={formData.email}
-          onChange={(v) => onFormChange({ email: v })}
-          placeholder={t("ph_email")}
-          error={errors.email}
-        />
+          <TextInput
+            label={t("label_email")}
+            required
+            type="email"
+            value={formData.email}
+            onChange={(v) => onFormChange({ email: v })}
+            placeholder={t("ph_email")}
+            error={errors.email}
+          />
 
-        <PhoneInput
-          label={t("label_phone")}
-          required
-          countryCode={formData.countryCode}
-          phoneNumber={formData.phoneNumber}
-          onCountryCodeChange={(v) => onFormChange({ countryCode: v })}
-          onPhoneNumberChange={(v) => onFormChange({ phoneNumber: v })}
-          placeholder={t("ph_phone")}
-          error={errors.phone}
-        />
+          <PhoneInput
+            label={t("label_phone")}
+            required
+            countryCode={formData.countryCode}
+            phoneNumber={formData.phoneNumber}
+            onCountryCodeChange={(v) => onFormChange({ countryCode: v })}
+            onPhoneNumberChange={(v) => onFormChange({ phoneNumber: v })}
+            placeholder={t("ph_phone")}
+            error={errors.phone}
+          />
 
-        <SelectInput
-          label={t("label_nationality")}
-          value={formData.nationality}
-          onChange={(v) => onFormChange({ nationality: v })}
-          options={NATIONALITIES}
-          placeholder={t("opt_select")}
-        />
+          <SelectInput
+            label={t("label_nationality")}
+            value={formData.nationality}
+            onChange={(v) => onFormChange({ nationality: v })}
+            options={NATIONALITIES}
+            placeholder={t("opt_select")}
+          />
 
-        <PartyStepper
-          label={t("label_party")}
-          required
-          value={formData.partySize}
-          max={maxParty}
-          onChange={(v) => onFormChange({ partySize: v })}
-          maxLabel={t("party_max", { n: maxParty })}
-          error={errors.party}
-        />
+          <div className="pt-2">
+            <PartyStepper
+              label={t("label_party")}
+              required
+              value={formData.partySize}
+              max={maxParty}
+              onChange={(v) => onFormChange({ partySize: v })}
+              maxLabel={t("party_max", { n: maxParty })}
+              error={errors.party}
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="mt-8 flex justify-between">
+      <div className="mt-10 flex justify-between">
         <Button variant="secondary" onClick={onBack} className="px-6">
+          <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
           {t("btn_back")}
         </Button>
-        <Button onClick={onNext}>{t("btn_next")}</Button>
+        <Button onClick={onNext}>
+          {t("btn_next")}
+          <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </Button>
       </div>
     </div>
   );

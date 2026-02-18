@@ -22,15 +22,19 @@ export default function TimeSlotList({
 
   if (loading) {
     return (
-      <div className="flex justify-center py-8">
+      <div className="flex flex-col items-center justify-center py-12 gap-3">
         <Spinner />
+        <span className="text-xs text-gray-muted">{lang === "ko" ? "불러오는 중..." : "Loading..."}</span>
       </div>
     );
   }
 
   if (slots.length === 0) {
     return (
-      <p className="text-center text-charcoal/50 py-8">{t("slot_empty")}</p>
+      <div className="text-center py-12">
+        <div className="text-3xl mb-3 opacity-30">-</div>
+        <p className="text-gray-muted text-sm">{t("slot_empty")}</p>
+      </div>
     );
   }
 
@@ -59,16 +63,16 @@ export default function TimeSlotList({
               if (e.key === "Enter" && !isFull) onSelectSlot(slot);
             }}
           >
-            <div className="font-heading font-bold">{start}</div>
-            <div className="text-xs text-charcoal/50 mb-1">
+            <div className="font-heading font-bold text-base mb-0.5">{start}</div>
+            <div className="text-[11px] text-gray-muted mb-2">
               {start} - {end}
             </div>
             {isFull ? (
-              <span className="text-red-400 text-xs font-medium">
+              <span className="inline-block text-[10px] font-medium text-gray-muted bg-gray-lighter px-2 py-0.5 rounded-full">
                 {t("slot_full")}
               </span>
             ) : (
-              <span className="text-green-600 text-xs">
+              <span className="inline-block text-[10px] font-medium text-gold bg-gold/10 px-2 py-0.5 rounded-full">
                 {t("slot_remaining", { n: remaining })}
               </span>
             )}

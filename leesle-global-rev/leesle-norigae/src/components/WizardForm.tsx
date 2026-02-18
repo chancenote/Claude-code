@@ -158,7 +158,7 @@ export default function WizardForm() {
     : 1;
 
   return (
-    <main className="max-w-3xl mx-auto px-4 pb-20">
+    <main className="max-w-2xl mx-auto px-6 pb-24">
       <ProgressBar currentStep={currentStep} />
 
       {currentStep === 1 && (

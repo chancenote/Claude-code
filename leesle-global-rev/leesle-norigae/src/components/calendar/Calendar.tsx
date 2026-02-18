@@ -23,38 +23,46 @@ export default function Calendar({ selectedDate, onSelectDate }: CalendarProps) 
       : `${monthNames.en[month]} ${year}`;
 
   return (
-    <div className="bg-white border border-gray-light rounded-xl p-4 sm:p-6 mb-6">
+    <div className="bg-white rounded-2xl p-5 sm:p-8 mb-8 shadow-sm border border-gray-light/60">
       {/* Month navigation */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-6">
         <button
           onClick={prevMonth}
-          className="p-2 hover:bg-gray-lighter rounded-lg transition"
+          className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-lighter transition-colors"
           aria-label="Previous month"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        <h3 className="font-heading font-bold text-lg">{monthLabel}</h3>
+        <h3 className="font-heading font-bold text-lg tracking-wide">{monthLabel}</h3>
         <button
           onClick={nextMonth}
-          className="p-2 hover:bg-gray-lighter rounded-lg transition"
+          className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-lighter transition-colors"
           aria-label="Next month"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
       </div>
 
       {/* Day headers */}
-      <div className="cal-grid mb-1">
-        {DAY_KEYS.map((key) => (
-          <div key={key} className="text-center text-xs font-medium text-charcoal/50 py-2">
+      <div className="cal-grid mb-2">
+        {DAY_KEYS.map((key, i) => (
+          <div
+            key={key}
+            className={`text-center text-[11px] font-medium tracking-wider uppercase py-2 ${
+              i === 0 ? "text-red-400" : "text-gray-muted"
+            }`}
+          >
             {t(key)}
           </div>
         ))}
       </div>
+
+      {/* Separator */}
+      <div className="h-px bg-gray-light/60 mb-2" />
 
       {/* Calendar body */}
       <div className="cal-grid">
@@ -63,6 +71,7 @@ export default function Calendar({ selectedDate, onSelectDate }: CalendarProps) 
             return <div key={`empty-${i}`} className="cal-cell empty" />;
           }
 
+          const isSunday = i % 7 === 0;
           let cls = "cal-cell";
           if (cell.isPast) cls += " disabled";
           if (cell.isToday) cls += " today";
@@ -71,7 +80,7 @@ export default function Calendar({ selectedDate, onSelectDate }: CalendarProps) 
           return (
             <div
               key={cell.date}
-              className={cls}
+              className={`${cls} ${!cell.isPast && selectedDate !== cell.date && isSunday ? "text-red-400/70" : ""}`}
               onClick={() => !cell.isPast && onSelectDate(cell.date)}
             >
               {cell.day}

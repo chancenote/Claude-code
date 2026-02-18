@@ -28,16 +28,22 @@ export default function StepDateTime({
   const { t } = useTranslation();
 
   return (
-    <div className="animate-fadeIn">
-      <h2 className="font-heading text-xl font-bold mb-6">{t("step1_title")}</h2>
+    <div className="step-section">
+      <h2 className="font-heading text-xl font-bold mb-1">{t("step1_title")}</h2>
+      <p className="text-sm text-gray-muted mb-8">
+        {t("hero_desc").replace(/<br\s*\/?>/g, " ").substring(0, 60)}
+      </p>
 
       <Calendar selectedDate={selectedDate} onSelectDate={onSelectDate} />
 
       {selectedDate && (
-        <div>
-          <h3 className="font-heading font-bold text-lg mb-3">
-            {t("slot_title")}
-          </h3>
+        <div className="animate-fadeInUp">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-1 h-5 bg-gold rounded-full" />
+            <h3 className="font-heading font-bold text-base">
+              {t("slot_title")}
+            </h3>
+          </div>
           <TimeSlotList
             slots={slots}
             loading={slotsLoading}
@@ -47,12 +53,15 @@ export default function StepDateTime({
         </div>
       )}
 
-      <div className="mt-8 flex justify-end">
+      <div className="mt-10 flex justify-end">
         <Button
           onClick={onNext}
           disabled={!selectedDate || !selectedSlot}
         >
           {t("btn_next")}
+          <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
         </Button>
       </div>
     </div>

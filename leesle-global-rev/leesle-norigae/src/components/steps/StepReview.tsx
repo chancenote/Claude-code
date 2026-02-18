@@ -46,12 +46,12 @@ export default function StepReview({
   ];
 
   return (
-    <div className="animate-fadeIn">
-      <h2 className="font-heading text-xl font-bold mb-6">{t("step3_title")}</h2>
+    <div className="step-section">
+      <h2 className="font-heading text-xl font-bold mb-8">{t("step3_title")}</h2>
 
       {/* Special Request */}
-      <div className="mb-6">
-        <label className="block text-sm font-medium mb-1.5">
+      <div className="mb-8">
+        <label className="block text-xs font-medium tracking-wide uppercase text-gray-muted mb-2">
           {t("label_request")}
         </label>
         <textarea
@@ -59,26 +59,36 @@ export default function StepReview({
           value={specialRequest}
           onChange={(e) => onSpecialRequestChange(e.target.value)}
           placeholder={t("ph_request")}
-          className="w-full border border-gray-light rounded-lg px-4 py-2.5 text-sm transition resize-none font-body"
+          className="w-full border border-gray-light rounded-lg px-4 py-3 text-sm transition-all duration-200 resize-none font-body bg-white"
         />
       </div>
 
-      {/* Review Summary */}
-      <div className="bg-gray-lighter rounded-xl p-5 sm:p-6 mb-6 space-y-3">
-        <h3 className="font-heading font-bold">{t("review_title")}</h3>
-        <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
+      {/* Review Summary Card */}
+      <div className="bg-white rounded-2xl p-5 sm:p-8 mb-8 shadow-sm border border-gray-light/60">
+        <div className="flex items-center gap-3 mb-5">
+          <div className="w-1 h-5 bg-gold rounded-full" />
+          <h3 className="font-heading font-bold text-base">{t("review_title")}</h3>
+        </div>
+        <div className="space-y-3">
           {reviewItems.map((item) => (
-            <span className="contents" key={item.key}>
-              <span className="text-charcoal/60">{t(item.key)}</span>
-              <span className="font-medium">{item.value}</span>
-            </span>
+            <div key={item.key} className="flex items-start justify-between py-2 border-b border-gray-light/40 last:border-0">
+              <span className="text-xs text-gray-muted tracking-wide uppercase shrink-0">
+                {t(item.key)}
+              </span>
+              <span className="text-sm font-medium text-right ml-4">
+                {item.value}
+              </span>
+            </div>
           ))}
         </div>
       </div>
 
       {/* Navigation */}
-      <div className="mt-8 flex justify-between">
+      <div className="mt-10 flex justify-between">
         <Button variant="secondary" onClick={onBack} className="px-6">
+          <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
           {t("btn_back")}
         </Button>
         <Button variant="cta" onClick={onSubmit} disabled={isSubmitting}>

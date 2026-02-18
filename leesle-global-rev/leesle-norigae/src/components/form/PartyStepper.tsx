@@ -21,11 +21,11 @@ export default function PartyStepper({
 }: PartyStepperProps) {
   return (
     <div>
-      <label className="block text-sm font-medium mb-1.5">
+      <label className="block text-xs font-medium tracking-wide uppercase text-gray-muted mb-2">
         {label}
-        {required && <span className="text-red-500 ml-0.5">*</span>}
+        {required && <span className="text-gold ml-0.5 normal-case">*</span>}
       </label>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-4">
         <button
           type="button"
           className="stepper-btn"
@@ -34,7 +34,9 @@ export default function PartyStepper({
         >
           -
         </button>
-        <span className="text-xl font-bold w-10 text-center">{value}</span>
+        <span className="text-2xl font-heading font-bold w-8 text-center tabular-nums">
+          {value}
+        </span>
         <button
           type="button"
           className="stepper-btn"
@@ -44,10 +46,12 @@ export default function PartyStepper({
           +
         </button>
         {maxLabel && (
-          <span className="text-sm text-charcoal/50">{maxLabel}</span>
+          <span className="text-xs text-gray-muted ml-2">{maxLabel}</span>
         )}
       </div>
-      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+      {error && (
+        <p className="text-red-500 text-xs mt-1.5">{error}</p>
+      )}
     </div>
   );
 }
