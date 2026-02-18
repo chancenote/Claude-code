@@ -13,7 +13,8 @@
       "Bash(copy:*)",
       "Bash(vercel:*)",
       "Bash(set \"VERCEL_ORG_ID=team_jAljPJUqJ0Uz4rTqbZfWS5Wd\")",
-      "Bash(git -C /c/claude-code/excel-claude-code ls-files)"
+      "Bash(git -C /c/claude-code/excel-claude-code ls-files)",
+      "Bash(git -C c:\\\\claude-code\\\\excel-claude-code ls-files:*)"
     ]
   }
 }
