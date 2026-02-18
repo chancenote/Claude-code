@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0a0e27;
+  --color-deep: #0f1338;
+  --color-surface: #151a3d;
+  --color-card: #1a2050;
+  --color-cc-blue: #4f7df5;
+  --color-cc-cyan: #00d4ff;
+  --color-cc-purple: #8b5cf6;
+  --color-cc-pink: #ec4899;
+  --color-cc-orange: #f59e0b;
+  --color-cc-green: #10b981;
+  --color-cc-red: #ef4444;
+  --color-text-primary: #e2e8f0;
+  --color-text-muted: #94a3b8;
+  --color-text-dim: #64748b;
+  --color-week-1: #4285F4;
+  --color-week-2: #34A853;
+  --color-week-3: #FB8C00;
+  --color-week-4: #E91E63;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-navy);
+  color: var(--color-text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-navy); }
+::-webkit-scrollbar-thumb { background: var(--color-cc-blue); border-radius: 3px; }
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-cc-cyan), var(--color-cc-blue), var(--color-cc-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-warm {
+  background: linear-gradient(135deg, var(--color-cc-orange), var(--color-cc-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Aurora animation */
+@keyframes aurora {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(-2%, 2%) rotate(1deg); }
+}
+
+/* Pulse dot animation */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Bounce animation */
+@keyframes bounce-slow {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* Week-specific top border gradients */
+.day-card-w1::before { background: linear-gradient(90deg, #4285F4, #5c9aff); }
+.day-card-w2::before { background: linear-gradient(90deg, #34A853, #5ec97a); }
+.day-card-w3::before { background: linear-gradient(90deg, #FB8C00, #ffa940); }
+.day-card-w4::before { background: linear-gradient(90deg, #E91E63, #ff4081); }
