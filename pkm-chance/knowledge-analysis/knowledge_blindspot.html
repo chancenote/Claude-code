@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowledge Blind Spot Analysis — Chance | NextCowork</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --surface2: #1a1a28;
+  --border: #2a2a3a;
+  --text: #e8e8f0;
+  --text-dim: #8888a0;
+  --accent: #6366f1;
+  --accent-glow: rgba(99,102,241,0.3);
+  --green: #22c55e;
+  --green-dim: rgba(34,197,94,0.15);
+  --yellow: #eab308;
+  --yellow-dim: rgba(234,179,8,0.15);
+  --red: #ef4444;
+  --red-dim: rgba(239,68,68,0.15);
+  --orange: #f97316;
+  --orange-dim: rgba(249,115,22,0.15);
+  --cyan: #06b6d4;
+  --cyan-dim: rgba(6,182,212,0.15);
+  --purple: #a855f7;
+  --purple-dim: rgba(168,85,247,0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', -apple-system, 'Malgun Gothic', '맑은 고딕', sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.grain {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0.03; pointer-events: none; z-index: 999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+.header {
+  padding: 40px 40px 20px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -20%;
+  width: 60%; height: 200%;
+  background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+  opacity: 0.4;
+  animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.1); }
+}
+
+.header-content { position: relative; z-index: 1; }
+
+.badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(99,102,241,0.1);
+  border: 1px solid rgba(99,102,241,0.3);
+  padding: 5px 14px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-family: 'Noto Sans KR', -apple-system, 'Malgun Gothic', sans-serif;
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+  background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: var(--text-dim);
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.subtitle strong { color: var(--text); font-weight: 500; }
+
+/* Summary strip */
+.summary-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.summary-card {
+  background: var(--surface);
+  padding: 20px 24px;
+  text-align: center;
+}
+
+.summary-card.highlight {
+  background: linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(168,85,247,0.08) 100%);
+}
+
+.summary-card .num {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+}
+
+.summary-card .label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  padding: 0 40px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  gap: 0;
+  overflow-x: auto;
+}
+
+.tab {
+  padding: 14px 22px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: 'Noto Sans KR', -apple-system, 'Malgun Gothic', sans-serif;
+}
+
+.tab:hover { color: var(--text); }
+.tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* Content */
+.content { padding: 30px 40px 60px; }
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* Radar section */
+.radar-grid {
+  display: grid;
+  grid-template-columns: 520px 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+  align-items: start;
+}
+
+.radar-canvas-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.domain-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.domain-list { gap: 8px; }
+
+.domain-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 18px;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.domain-item:hover {
+  border-color: var(--accent);
+  background: var(--surface2);
+}
+
+.domain-item .name {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.domain-item .bar-wrap {
+  width: 120px;
+  height: 8px;
+  background: var(--surface2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.domain-item .bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.domain-item .pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  width: 36px;
+  text-align: right;
+}
+
+/* Blind spots grid */
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title .dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-btn {
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Noto Sans KR', -apple-system, 'Malgun Gothic', sans-serif;
+}
+
+.filter-btn:hover { border-color: var(--accent); color: var(--text); }
+.filter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+
+.sort-select {
+  margin-left: auto;
+  padding: 7px 14px;
+  font-size: 13px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: 'Noto Sans KR', -apple-system, 'Malgun Gothic', sans-serif;
+  cursor: pointer;
+}
+
+.blindspot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.bs-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.bs-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.bs-card .severity {
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+}
+
+.bs-card .bs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  padding-left: 12px;
+  gap: 8px;
+}
+
+.bs-card .bs-title {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.bs-card .bs-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+
+.bs-card .bs-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+  padding-left: 12px;
+  line-height: 1.75;
+}
+
+.bs-card .bs-meta {
+  margin-top: 12px;
+  padding-left: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bs-card .bs-action {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.bs-card .bs-revenue {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  background: var(--purple-dim);
+  color: var(--purple);
+  flex-shrink: 0;
+}
+
+/* Checklist */
+.checklist { display: flex; flex-direction: column; gap: 6px; }
+
+.check-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 14px;
+  align-items: center;
+  padding: 13px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 15px;
+}
+
+.check-item:hover { background: var(--surface2); }
+
+.check-item.checked {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+.check-box {
+  width: 20px; height: 20px;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.check-item.checked .check-box {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.check-box svg {
+  width: 12px; height: 12px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.check-item.checked .check-box svg { opacity: 1; }
+
+.check-priority {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+.check-revenue {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--purple);
+  white-space: nowrap;
+}
+
+/* Progress ring */
+.progress-section {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 30px;
+  align-items: center;
+  margin-bottom: 30px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.ring-wrap { text-align: center; }
+
+.progress-text {
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.85;
+}
+
+.progress-text strong { color: var(--text); }
+
+/* Revenue Pipeline */
+.revenue-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.rev-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.rev-panel.full-width {
+  grid-column: 1 / -1;
+}
+
+.rev-panel-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rev-panel-title .icon {
+  font-size: 20px;
+}
+
+/* Revenue bars */
+.rev-bar-item {
+  display: grid;
+  grid-template-columns: 140px 1fr 80px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.rev-bar-item .rev-label {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rev-bar-item .rev-bar-wrap {
+  height: 28px;
+  background: var(--surface2);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.rev-bar-item .rev-bar {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(90deg, var(--accent), var(--purple));
+  position: relative;
+}
+
+.rev-bar-item .rev-amount {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--purple);
+  text-align: left;
+}
+
+/* Revenue funnel */
+.funnel-stages {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.funnel-stage {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.funnel-stage:last-child { border-bottom: none; }
+
+.funnel-shape {
+  width: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.funnel-bar {
+  height: 32px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--accent), var(--cyan));
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.funnel-info { flex: 1; }
+
+.funnel-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.funnel-target {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.funnel-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+/* Product pipeline table */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-table th {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 500;
+}
+
+.product-table td {
+  padding: 15px 14px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.product-table tr:last-child td { border-bottom: none; }
+
+.product-table tr:hover td { background: var(--surface2); }
+
+.product-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-live { background: var(--green-dim); color: var(--green); }
+.status-plan { background: var(--yellow-dim); color: var(--yellow); }
+.status-wip { background: var(--cyan-dim); color: var(--cyan); }
+.status-none { background: rgba(255,255,255,0.05); color: var(--text-dim); }
+
+.product-progress-wrap {
+  width: 80px;
+  height: 8px;
+  background: var(--surface2);
+  border-radius: 4px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.product-progress-bar {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--accent);
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-progress-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+  vertical-align: middle;
+}
+
+/* Revenue summary cards */
+.rev-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.rev-summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.rev-summary-card .rev-num {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.rev-summary-card .rev-sub {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+}
+
+/* Action plan timeline */
+.timeline { position: relative; padding-left: 30px; }
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--purple), var(--cyan), var(--green));
+  border-radius: 1px;
+}
+
+.tl-item {
+  position: relative;
+  margin-bottom: 20px;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 22px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+}
+
+.tl-item .tl-week {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+}
+
+.tl-item .tl-title {
+  font-weight: 700;
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.tl-item .tl-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.75;
+}
+
+.tl-item .tl-revenue {
+  margin-top: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--purple);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tl-item .tl-tags {
+  margin-top: 10px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tl-tag {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 5px;
+  background: var(--accent-glow);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* Knowledge-Revenue Map */
+.kr-map-item {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.kr-map-item:last-child { border-bottom: none; }
+
+.kr-arrow {
+  color: var(--text-dim);
+  font-size: 18px;
+}
+
+.kr-knowledge { color: var(--cyan); font-weight: 500; }
+.kr-product { color: var(--accent); font-weight: 500; }
+.kr-revenue { color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+
+/* Solopreneur strategies */
+.strat-filter-bar {
+  display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;
+}
+
+.strat-filter-btn {
+  padding: 7px 16px; font-size: 13px; font-weight: 500;
+  border: 1px solid var(--border); border-radius: 6px;
+  background: var(--surface); color: var(--text-dim);
+  cursor: pointer; transition: all 0.2s;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.strat-filter-btn:hover { border-color: var(--accent); color: var(--text); }
+.strat-filter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+
+.strat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 16px;
+}
+
+.strat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px;
+  position: relative;
+  transition: all 0.3s;
+}
+.strat-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.strat-card .strat-num {
+  position: absolute; top: 14px; right: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--text-dim); opacity: 0.4;
+}
+
+.strat-card .strat-cat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; padding: 3px 10px; border-radius: 5px;
+  display: inline-block; margin-bottom: 10px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+
+.strat-card .strat-title {
+  font-size: 16px; font-weight: 700; margin-bottom: 6px;
+}
+
+.strat-card .strat-case {
+  font-size: 12px; color: var(--cyan); margin-bottom: 8px; font-weight: 500;
+}
+
+.strat-card .strat-desc {
+  font-size: 14px; color: var(--text-dim); line-height: 1.75; margin-bottom: 14px;
+}
+
+.strat-card .strat-btns {
+  display: flex; gap: 8px;
+}
+
+.copy-open-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; font-size: 12px; font-weight: 600;
+  border: 1px solid var(--border); border-radius: 6px;
+  background: var(--surface2); color: var(--text);
+  cursor: pointer; transition: all 0.2s;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.copy-open-btn:hover { border-color: var(--accent); background: rgba(99,102,241,0.1); }
+.copy-open-btn.claude { border-color: rgba(168,85,247,0.4); }
+.copy-open-btn.claude:hover { background: rgba(168,85,247,0.15); color: #c084fc; }
+.copy-open-btn.gpt { border-color: rgba(34,197,94,0.4); }
+.copy-open-btn.gpt:hover { background: rgba(34,197,94,0.1); color: #4ade80; }
+
+.copy-toast {
+  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+  background: var(--green); color: #000; font-weight: 600;
+  padding: 10px 24px; border-radius: 8px; font-size: 14px;
+  z-index: 9999; opacity: 0; transition: opacity 0.3s;
+  pointer-events: none;
+}
+.copy-toast.show { opacity: 1; }
+
+.strat-intro {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  line-height: 1.8;
+  font-size: 14px;
+  color: var(--text-dim);
+}
+.strat-intro strong { color: var(--text); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .summary-strip { grid-template-columns: repeat(3, 1fr); }
+  .revenue-grid { grid-template-columns: 1fr; }
+  .rev-summary { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .summary-strip { grid-template-columns: repeat(2, 1fr); }
+  .radar-grid { grid-template-columns: 1fr; }
+  .radar-canvas-wrap { max-width: 100%; }
+  .progress-section { grid-template-columns: 1fr; }
+  .header, .content { padding-left: 20px; padding-right: 20px; }
+  .tabs { padding: 0 20px; }
+  h1 { font-size: 28px; }
+  .blindspot-grid { grid-template-columns: 1fr; }
+  .strat-grid { grid-template-columns: 1fr; }
+  .rev-bar-item { grid-template-columns: 100px 1fr 70px; }
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="badge">Knowledge Audit Report v2.0</div>
+    <h1>지식 기반 사각지대 분석</h1>
+    <p class="subtitle"><strong>Chance (이종찬)</strong> — NextCowork CEO · Space&times;AI Innovation Expert · 2026.02.20 기준 분석 · 수익 영향도 반영</p>
+  </div>
+</div>
+
+<div class="summary-strip" id="summaryStrip"></div>
+
+<div class="tabs" id="tabBar"></div>
+
+<div class="content">
+  <!-- PANEL 1: Overview -->
+  <div class="panel active" id="panel-overview">
+    <div class="radar-grid">
+      <div class="radar-canvas-wrap">
+        <canvas id="radarChart" width="480" height="480"></canvas>
+      </div>
+      <div class="domain-list" id="domainList"></div>
+    </div>
+    <div class="section-title"><span class="dot" style="background:var(--red)"></span> 즉시 보완 필요 (Critical Blind Spots)</div>
+    <div class="blindspot-grid" id="criticalGrid"></div>
+    <div class="section-title"><span class="dot" style="background:var(--yellow)"></span> 강화 권장 (Needs Improvement)</div>
+    <div class="blindspot-grid" id="improveGrid"></div>
+  </div>
+
+  <!-- PANEL 2: Blind Spots Detail -->
+  <div class="panel" id="panel-blindspots">
+    <div class="section-title"><span class="dot" style="background:var(--red)"></span> 전체 사각지대 분석</div>
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all" onclick="filterBlindspots('all', this)">전체</button>
+      <button class="filter-btn" data-filter="critical" onclick="filterBlindspots('critical', this)">긴급</button>
+      <button class="filter-btn" data-filter="warning" onclick="filterBlindspots('warning', this)">주의</button>
+      <button class="filter-btn" data-filter="info" onclick="filterBlindspots('info', this)">참고</button>
+      <select class="sort-select" onchange="sortBlindspots(this.value)">
+        <option value="severity">심각도순</option>
+        <option value="revenue">수익 영향순</option>
+        <option value="score">점수 낮은순</option>
+      </select>
+    </div>
+    <div class="blindspot-grid" id="allBlindspotsGrid"></div>
+  </div>
+
+  <!-- PANEL 3: Revenue Pipeline -->
+  <div class="panel" id="panel-revenue">
+    <div class="rev-summary" id="revSummary"></div>
+    <div class="revenue-grid">
+      <div class="rev-panel">
+        <div class="rev-panel-title"><span class="icon">📊</span> 사각지대별 수익 기회 (연간)</div>
+        <div id="revenueBarChart"></div>
+      </div>
+      <div class="rev-panel">
+        <div class="rev-panel-title"><span class="icon">🔄</span> 수익 퍼널 현황</div>
+        <div class="funnel-stages" id="revenueFunnel"></div>
+      </div>
+      <div class="rev-panel full-width">
+        <div class="rev-panel-title"><span class="icon">📦</span> 콘텐츠 제품 파이프라인</div>
+        <table class="product-table" id="productTable"></table>
+      </div>
+      <div class="rev-panel full-width">
+        <div class="rev-panel-title"><span class="icon">🗺</span> 지식 &rarr; 제품 &rarr; 수익 매핑</div>
+        <div id="knowledgeRevenueMap"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 4: Checklist -->
+  <div class="panel" id="panel-checklist">
+    <div class="progress-section">
+      <div class="ring-wrap">
+        <canvas id="progressRing" width="160" height="160"></canvas>
+        <div style="margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-dim);" id="progressLabel">0 / 22 완료</div>
+      </div>
+      <div class="progress-text">
+        아래 체크리스트는 발견된 사각지대를 보완하기 위한 <strong>22개 핵심 학습 항목</strong>입니다.<br>
+        항목을 클릭하면 완료 처리되며, 진행률이 <strong>자동 저장</strong>됩니다.<br>
+        <strong>수익 영향도</strong>가 높은 항목부터 정렬되어 있습니다.<br>
+        <span style="color:var(--purple);font-size:12px;">각 항목 우측의 금액은 연간 예상 수익 기여도입니다.</span>
+      </div>
+    </div>
+    <div class="checklist" id="checklistWrap"></div>
+  </div>
+
+  <!-- PANEL 5: Solopreneur Marketing -->
+  <div class="panel" id="panel-solopreneur">
+    <div class="strat-intro">
+      <strong>1인 유니콘 마케팅 전략 라이브러리</strong> — Justin Welsh, Sahil Bloom, Pieter Levels, Ali Abdaal, Alex Hormozi 등 연 매출 $1M~$10M+ 달성한 파워 솔로프리너들의 실전 전략 32가지.<br>
+      각 전략의 <strong>"복사 후 열기"</strong> 버튼을 클릭하면 심화 리서치 프롬프트가 자동 복사되고 Claude/GPT가 열립니다.
+    </div>
+    <div class="strat-filter-bar" id="stratFilterBar"></div>
+    <div class="strat-grid" id="stratGrid"></div>
+  </div>
+
+  <!-- PANEL 6: Action Plan -->
+  <div class="panel" id="panel-plan">
+    <div class="section-title" style="margin-bottom:24px"><span class="dot" style="background:var(--accent)"></span> 4주 사각지대 보완 로드맵 (수익 중심)</div>
+    <div class="timeline" id="timelineWrap"></div>
+  </div>
+</div>
+
+<div class="copy-toast" id="copyToast">프롬프트 복사 완료! Claude 채팅창에서 Ctrl+V 붙여넣기</div>
+
+<script>
+// =====================================================
+// DATA
+// =====================================================
+const domains = [
+  { name: 'AI 도구 활용 & 트렌드', score: 92, color: '#22c55e', status: '강함' },
+  { name: 'AI 교육 커리큘럼 설계', score: 88, color: '#22c55e', status: '강함' },
+  { name: '공유오피스 컨설팅', score: 95, color: '#22c55e', status: '강함' },
+  { name: '콘텐츠 마케팅 & 브랜딩', score: 75, color: '#eab308', status: '보통' },
+  { name: '비즈니스 모델 & 수익화', score: 70, color: '#eab308', status: '보통' },
+  { name: '커뮤니티 운영 & 리텐션', score: 60, color: '#eab308', status: '보통' },
+  { name: 'AI 에이전트 기술 구현', score: 55, color: '#f97316', status: '약함' },
+  { name: 'SaaS / 프로덕트 개발', score: 45, color: '#f97316', status: '약함' },
+  { name: '데이터 분석 & 측정', score: 40, color: '#ef4444', status: '사각' },
+  { name: '가격 전략 & 패키징', score: 40, color: '#ef4444', status: '사각' },
+  { name: '재무·회계·세무', score: 38, color: '#ef4444', status: '사각' },
+  { name: '세일즈 퍼널 & 전환', score: 35, color: '#ef4444', status: '사각' },
+  { name: '영어 콘텐츠 & 글로벌', score: 35, color: '#ef4444', status: '사각' },
+  { name: '법률·계약·지재권', score: 30, color: '#ef4444', status: '사각' },
+];
+
+const blindspots = [
+  {
+    title: '세일즈 퍼널 & 전환 최적화 부재',
+    severity: 'critical',
+    domain: '세일즈 퍼널 & 전환',
+    score: 35,
+    revenueImpact: 4000,
+    desc: '무료 콘텐츠에서 유료 전환까지의 세일즈 퍼널이 설계되어 있지 않습니다. 랜딩페이지, CTA 최적화, 이메일 시퀀스, 전환율 추적 등 체계적인 세일즈 프로세스가 부재합니다. 현재 수익은 직접 영업에 의존하고 있어 확장성에 한계가 있습니다.',
+    action: '→ 리드 마그넷 + 이메일 시퀀스 + 세일즈 페이지 구축'
+  },
+  {
+    title: '데이터 분석·측정 역량 부재',
+    severity: 'critical',
+    domain: '데이터 분석 & 측정',
+    score: 40,
+    revenueImpact: 3000,
+    desc: '교육 효과 측정, 콘텐츠 퍼포먼스 분석, 비즈니스 KPI 트래킹을 위한 정량적 분석 체계가 없습니다. Google Analytics, 퍼널 분석, A/B 테스트 등의 역량이 부재하여 의사결정이 감에 의존하고 있습니다.',
+    action: '→ GA4 + Looker Studio 대시보드 구축'
+  },
+  {
+    title: '법률·계약·지재권 지식 공백',
+    severity: 'critical',
+    domain: '법률·계약·지재권',
+    score: 30,
+    revenueImpact: 1500,
+    desc: '컨설팅 계약서 표준화, AI 생성 콘텐츠 저작권, 교육 서비스 약관, 프리랜서/1인기업 법적 리스크에 대한 체계적 지식이 부재합니다. 사업 규모 확장 시 계약 분쟁, IP 유출 등 심각한 리스크가 됩니다.',
+    action: '→ 표준 컨설팅 계약서 + AI 저작권 가이드 확보'
+  },
+  {
+    title: '영어 콘텐츠 & 글로벌 확장 전략 미비',
+    severity: 'critical',
+    domain: '영어 콘텐츠 & 글로벌',
+    score: 35,
+    revenueImpact: 5000,
+    desc: '"글로벌 Space×AI 전문가" 포지셔닝 목표가 있으나, 영어 콘텐츠, 해외 플랫폼 진출 전략, 국제 네트워킹 자료가 거의 없습니다. 글로벌 시장의 단가가 국내 대비 3~5배 높아 수익 레버리지가 큰 영역입니다.',
+    action: '→ 영문 LinkedIn + Substack 영문 뉴스레터 론칭'
+  },
+  {
+    title: '재무·회계·세무 관리 체계 미흡',
+    severity: 'critical',
+    domain: '재무·회계·세무',
+    score: 38,
+    revenueImpact: 2000,
+    desc: '체계적인 재무 모델링, 세금 최적화, 1인기업 재무전략이 부족합니다. 2026 사업계획서의 매출 목표(10억원)에 비해 재무 관리 역량이 뒷받침되지 않아 세금 누수, 캐시플로우 위기 등의 리스크가 있습니다.',
+    action: '→ 월별 P&L 대시보드 + 세무 최적화 상담'
+  },
+  {
+    title: '가격 전략 & 패키징 미수립',
+    severity: 'critical',
+    domain: '가격 전략 & 패키징',
+    score: 40,
+    revenueImpact: 3000,
+    desc: '각 서비스(코호트, 컨설팅, 템플릿, 멤버십)의 가격이 체계적인 시장조사나 가치 기반 프라이싱 없이 설정되어 있습니다. 가격 앵커링, 번들링, 티어 구조 등의 전략이 없어 동일 노력 대비 수익이 최적화되지 않고 있습니다.',
+    action: '→ 경쟁사 가격 벤치마크 + 3-티어 가격 체계 설계'
+  },
+  {
+    title: 'AI 에이전트 기술 구현 깊이 부족',
+    severity: 'warning',
+    domain: 'AI 에이전트 기술 구현',
+    score: 55,
+    revenueImpact: 4000,
+    desc: '"100일 100 에이전트" 프로젝트를 선언했으나, MCP, API 연동, n8n/Make 자동화, 에이전트 프레임워크 등의 기술 구현이 체계적으로 정리되어 있지 않습니다. 이 영역의 깊이가 곧 프리미엄 컨설팅 & SaaS 제품의 차별화 요소입니다.',
+    action: '→ 에이전트 구현 포트폴리오 체계적 빌드업'
+  },
+  {
+    title: 'SaaS/프로덕트 개발 경험 부재',
+    severity: 'warning',
+    domain: 'SaaS / 프로덕트 개발',
+    score: 45,
+    revenueImpact: 6000,
+    desc: '컨설팅과 교육 "서비스"에 집중되어 있고, 반복 매출을 만드는 디지털 프로덕트 개발 경험이 없습니다. 시간 판매 모델(컨설팅)의 한계를 넘으려면 제품화(유료 템플릿, 온라인 코스, SaaS)가 필수적입니다.',
+    action: '→ 노션 템플릿 + 온라인 코스 파일럿 출시'
+  },
+  {
+    title: '콘텐츠 배포 채널 다각화 미흡',
+    severity: 'warning',
+    domain: '콘텐츠 마케팅 & 브랜딩',
+    score: 75,
+    revenueImpact: 2500,
+    desc: '인스타/스레드/유튜브 계획은 있으나, SEO, 뉴스레터, 팟캐스트 등의 배포 퍼널이 체계적으로 운영되지 않고 있습니다. AI 그림노트 등 독창적 콘텐츠 자산의 배포·수익화 연결이 약합니다.',
+    action: '→ 콘텐츠 재활용 파이프라인 (1→7 포맷) 구축'
+  },
+  {
+    title: '커뮤니티 리텐션 & 수익화 시스템 부재',
+    severity: 'warning',
+    domain: '커뮤니티 운영 & 리텐션',
+    score: 60,
+    revenueImpact: 3000,
+    desc: '모닝 AI 포럼을 운영 중이나, 유료 멤버십 전환, 리텐션 지표, 자동화된 온보딩/인게이지먼트 시스템이 없습니다. 커뮤니티가 수익 엔진이 되려면 무료→유료 전환 구조와 MRR 추적이 필요합니다.',
+    action: '→ 멤버십 티어 설계 + 리텐션 지표 대시보드'
+  },
+  {
+    title: '수익 모델 검증 데이터 부재',
+    severity: 'warning',
+    domain: '비즈니스 모델 & 수익화',
+    score: 70,
+    revenueImpact: 2000,
+    desc: '다양한 수익원(코호트, 컨설팅, 디지털강좌, 멤버십, 강연)을 나열하고 있으나, 각 채널별 수익 검증 데이터, CAC(고객획득비용), LTV(생애가치) 분석이 없어 리소스 배분이 비효율적일 수 있습니다.',
+    action: '→ 수익 채널별 유닛 이코노믹스 검증'
+  },
+  {
+    title: '개인 건강·에너지·위임 체계',
+    severity: 'info',
+    domain: '지속가능성',
+    score: 65,
+    revenueImpact: 0,
+    desc: '캘린더에 점심/산책 시간이 배치되어 있으나, 슈퍼솔로프리너로서 번아웃 방지, 장기적 에너지 관리, 위임 체계 구축에 대한 전략적 사고가 보이지 않습니다. 지속 가능한 성장의 전제조건입니다.',
+    action: '→ "에너지 감사" + AI 자동화 위임 목록 작성'
+  }
+];
+
+const checklistItems = [
+  // Revenue-weighted order (highest impact first)
+  { text: '노션 유료 템플릿 "AI 실무활용 스타터킷" Gumroad 출시', priority: 'critical', domain: 'SaaS', revenue: '₩6,000만/년' },
+  { text: '온라인 코스 파일럿 (1모듈) 제작 & 판매 테스트', priority: 'critical', domain: 'SaaS', revenue: '₩6,000만/년' },
+  { text: '영문 LinkedIn 프로필 최적화 + 주 1회 영문 포스트', priority: 'critical', domain: '글로벌', revenue: '₩5,000만/년' },
+  { text: '영문 Substack "Space×AI Insights" 뉴스레터 론칭', priority: 'critical', domain: '글로벌', revenue: '₩5,000만/년' },
+  { text: 'n8n/Make 기반 자동화 워크플로우 3개 구축', priority: 'critical', domain: '에이전트', revenue: '₩4,000만/년' },
+  { text: 'MCP 서버 + Claude API 에이전트 포트폴리오 구축', priority: 'critical', domain: '에이전트', revenue: '₩4,000만/년' },
+  { text: '리드 마그넷(무료 PDF) + 이메일 시퀀스 5통 설계', priority: 'critical', domain: '세일즈', revenue: '₩4,000만/년' },
+  { text: '서비스별 세일즈 페이지 + CTA 최적화', priority: 'critical', domain: '세일즈', revenue: '₩4,000만/년' },
+  { text: '경쟁사 가격 벤치마크 + 3-티어 가격 체계 설계', priority: 'critical', domain: '가격', revenue: '₩3,000만/년' },
+  { text: '서비스 번들링 & 가격 앵커링 전략 수립', priority: 'high', domain: '가격', revenue: '₩3,000만/년' },
+  { text: 'GA4 + Looker Studio 기초 학습 & 대시보드 구축', priority: 'high', domain: '데이터', revenue: '₩3,000만/년' },
+  { text: '교육 프로그램별 NPS/효과 측정 프레임워크 설계', priority: 'high', domain: '데이터', revenue: '₩3,000만/년' },
+  { text: '모닝 AI 포럼 유료 멤버십 3-티어 설계 & 론칭', priority: 'high', domain: '커뮤니티', revenue: '₩3,000만/년' },
+  { text: '커뮤니티 멤버 온보딩 자동화 시퀀스 구축', priority: 'high', domain: '커뮤니티', revenue: '₩3,000만/년' },
+  { text: '콘텐츠 재활용 파이프라인 (1 소스→7 포맷)', priority: 'medium', domain: '콘텐츠', revenue: '₩2,500만/년' },
+  { text: 'SEO 기초 학습 + 블로그 SEO 최적화 5편', priority: 'medium', domain: '콘텐츠', revenue: '₩2,500만/년' },
+  { text: '수익 채널별 CAC/LTV 유닛 이코노믹스 분석', priority: 'high', domain: '수익화', revenue: '₩2,000만/년' },
+  { text: '월별 P&L 대시보드 구축 + 3개월 소급 입력', priority: 'high', domain: '재무', revenue: '₩2,000만/년' },
+  { text: '1인기업 세무 최적화 전략 학습 (세무사 상담)', priority: 'medium', domain: '재무', revenue: '₩2,000만/년' },
+  { text: '표준 컨설팅 계약서 템플릿 확보 (법률 자문)', priority: 'medium', domain: '법률', revenue: '₩1,500만/년' },
+  { text: 'AI 생성 콘텐츠 저작권 가이드 학습 & 정리', priority: 'medium', domain: '법률', revenue: '₩1,500만/년' },
+  { text: '주간 에너지 감사 + AI 자동화 위임 업무 목록', priority: 'low', domain: '지속가능성', revenue: '간접효과' },
+];
+
+const contentProducts = [
+  { name: 'AI 실무활용 스타터킷', type: '노션 템플릿', price: '₩29,000', platform: 'Gumroad', status: 'plan', readiness: 30, monthlyTarget: 50, revenue: '₩145만/월' },
+  { name: '공유오피스 AI 도입 가이드', type: 'e-book (PDF)', price: '₩49,000', platform: '자체 세일즈', status: 'none', readiness: 10, monthlyTarget: 20, revenue: '₩98만/월' },
+  { name: 'Space×AI 실전 코호트', type: '6주 코호트', price: '₩590,000', platform: '자체 운영', status: 'live', readiness: 80, monthlyTarget: 8, revenue: '₩472만/월' },
+  { name: 'AI 에이전트 101', type: '온라인 코스', price: '₩99,000', platform: 'Class101', status: 'plan', readiness: 20, monthlyTarget: 30, revenue: '₩297만/월' },
+  { name: '모닝 AI 포럼 Pro', type: '월간 멤버십', price: '₩19,000/월', platform: '자체 운영', status: 'plan', readiness: 40, monthlyTarget: 100, revenue: '₩190만/월' },
+  { name: 'Space×AI Insights', type: '영문 뉴스레터', price: '$10/월', platform: 'Substack', status: 'none', readiness: 5, monthlyTarget: 200, revenue: '$2,000/월' },
+];
+
+const revenueFunnel = [
+  { stage: '무료 콘텐츠', desc: '블로그, SNS, 유튜브, AI 그림노트', target: '월 10,000 도달', current: '진행중', width: 100, statusType: 'wip' },
+  { stage: '리드 캡처', desc: '뉴스레터 구독, 무료 템플릿 다운로드', target: '월 500 구독자', current: '미구축', width: 75, statusType: 'none' },
+  { stage: '저가 상품 (₩1~5만)', desc: '노션 템플릿, e-book, 미니 가이드', target: '월 50건', current: '기획중', width: 55, statusType: 'plan' },
+  { stage: '중가 상품 (₩5~30만)', desc: '온라인 코스, 워크숍, 그룹 코칭', target: '월 20건', current: '기획중', width: 38, statusType: 'plan' },
+  { stage: '고가 상품 (₩30~100만)', desc: '코호트, 1:1 컨설팅, 기업 자문', target: '월 5건', current: '운영중', width: 25, statusType: 'live' },
+  { stage: '반복매출 (멤버십)', desc: '유료 커뮤니티, 프리미엄 뉴스레터', target: '100명 유지', current: '미구축', width: 15, statusType: 'none' },
+];
+
+const knowledgeRevenueMap = [
+  { knowledge: 'AI 교육 설계', product: 'Space×AI 코호트', revenue: '₩5,664만/년' },
+  { knowledge: 'AI 도구 활용', product: 'AI 에이전트 101 코스', revenue: '₩3,564만/년' },
+  { knowledge: '공유오피스 컨설팅', product: '공유오피스 AI 가이드', revenue: '₩1,176만/년' },
+  { knowledge: 'AI 실무 노하우', product: '노션 스타터킷 템플릿', revenue: '₩1,740만/년' },
+  { knowledge: '커뮤니티 운영', product: '모닝 AI 포럼 Pro 멤버십', revenue: '₩2,280만/년' },
+  { knowledge: 'Space×AI 인사이트', product: '영문 Substack 뉴스레터', revenue: '₩3,200만/년' },
+];
+
+const actionPlan = [
+  {
+    week: 'WEEK 1 — 수익 기반 구축',
+    title: '재무 체계 + 가격 전략 + 세일즈 퍼널 설계',
+    desc: '월별 P&L 대시보드 구축 & 3개월 소급 입력 | 경쟁사 가격 벤치마크 조사 + 3-티어 가격 체계 초안 | 리드 마그넷(무료 AI 활용 가이드 PDF) 제작 | 이메일 시퀀스 5통 설계 + 세일즈 페이지 1개 구축 | 세무사 30분 상담 예약',
+    tags: ['재무', '가격', '세일즈'],
+    revenue: '기반 구축 → 전체 수익 구조의 토대'
+  },
+  {
+    week: 'WEEK 2 — 디지털 프로덕트 론칭',
+    title: '노션 템플릿 출시 + 온라인 코스 기획 + 에이전트 빌드',
+    desc: '노션 유료 템플릿 "AI 실무활용 스타터킷" Gumroad 출시 (₩29,000) | 온라인 코스 "AI 에이전트 101" 커리큘럼 설계 + 모듈 1 촬영 | n8n 자동화 워크플로우 2개 구축 (콘텐츠 배포, 리드 수집) | MCP 기반 에이전트 프로토타입 1개 | 표준 컨설팅 계약서 확보 (법률 자문)',
+    tags: ['SaaS', '에이전트', '법률'],
+    revenue: '첫 디지털 제품 매출 + 기술 포트폴리오 구축'
+  },
+  {
+    week: 'WEEK 3 — 글로벌 & 콘텐츠 확장',
+    title: '영문 콘텐츠 시작 + 배포 파이프라인 + SEO',
+    desc: '영문 LinkedIn 프로필 리뉴얼 + 영문 포스트 3편 발행 | Substack "Space×AI Insights" 영문 뉴스레터 세팅 + 첫 발행 | 콘텐츠 재활용 파이프라인 설계 (1 → 7 포맷) | SEO 기초 적용 블로그 5편 | GA4 + Looker Studio 대시보드 구축',
+    tags: ['글로벌', '콘텐츠', '데이터'],
+    revenue: '글로벌 시장 진입 + 유기적 트래픽 채널 확보'
+  },
+  {
+    week: 'WEEK 4 — 수익 검증 & 커뮤니티 수익화',
+    title: '유닛 이코노믹스 + 커뮤니티 유료화 + 성과 리뷰',
+    desc: '수익 채널별 CAC/LTV 초기 분석 & 유닛 이코노믹스 검증 | 모닝 AI 포럼 유료 멤버십 3-티어 설계 & 발표 | 커뮤니티 온보딩 자동화 시퀀스 구축 | 4주 성과 리뷰: 실제 매출, 리드 수, 전환율 점검 | Q2 OKR 설정: 월 매출 목표 + 핵심 KPI 정의',
+    tags: ['수익화', '커뮤니티', '데이터'],
+    revenue: '수익 모델 검증 완료 → 스케일 준비'
+  }
+];
+
+const soloStrategies = [
+  // --- 콘텐츠 레버리지 ---
+  { cat: '콘텐츠', title: 'LinkedIn 글쓰기 시스템으로 $5M/년 달성', person: 'Justin Welsh', desc: 'LinkedIn에 매일 1포스트를 2년간 지속하며 50만 팔로워를 구축. "Saturday Solopreneur" 뉴스레터와 디지털 코스를 연결해 1인 사업으로 연 $5M 매출을 만든 전략.', prompt: 'Justin Welsh의 LinkedIn 콘텐츠 전략을 상세히 분석해줘. 그의 글쓰기 공식(hook-story-offer), 매일 포스팅 루틴, 팔로워→뉴스레터→유료 코스 전환 퍼널, "The Operating System" 코스의 가격 전략과 론칭 방법을 구체적으로 알려줘. 나도 AI·공유오피스 분야에서 LinkedIn으로 월 $10K를 만들 수 있는 실행 계획을 세워줘.' },
+  { cat: '콘텐츠', title: '뉴스레터 → 미디어 제국 전환 전략', person: 'Sahil Bloom', desc: 'Twitter 스레드로 시작해 "The Curiosity Chronicle" 뉴스레터 70만 구독자를 달성. 무료 콘텐츠에서 유료 커뮤니티와 투자 펀드까지 확장한 파워 솔로프리너 모델.', prompt: 'Sahil Bloom의 뉴스레터 성장 전략을 상세히 분석해줘. Twitter 스레드→뉴스레터→유료 커뮤니티→투자 펀드로 이어지는 사업 확장 로드맵, 콘텐츠 재활용 시스템(1 thread = 1 newsletter = 1 short), 그리고 구독자 70만명까지의 성장 전술을 단계별로 알려줘.' },
+  { cat: '콘텐츠', title: '유튜브 교육 콘텐츠로 연 $5M 수익', person: 'Ali Abdaal', desc: 'NHS 의사가 생산성 유튜브 채널로 500만 구독자를 모으고, "Part-Time YouTuber Academy" 코호트 기반 코스로 연 $5M+ 수익. 콘텐츠→교육 비즈니스 전환의 교과서.', prompt: 'Ali Abdaal의 유튜브→교육 비즈니스 전환 전략을 분석해줘. 구독자 성장 공식, 영상 제작 시스템, "Part-Time YouTuber Academy" 코호트 코스의 가격 전략(₩200만+)과 론칭 방법, 그리고 팀 없이 시작해서 팀을 구축하기까지의 과정을 구체적으로 알려줘. AI 교육 분야에서 같은 모델을 적용할 수 있는 방법도 제안해줘.' },
+  { cat: '콘텐츠', title: '30일 글쓰기 챌린지로 코스 사업 구축', person: 'Dickie Bush & Nicolas Cole', desc: '"Ship 30 for 30" — 30일 동안 매일 온라인 글을 발행하는 코호트 프로그램. 글쓰기 습관→콘텐츠 자산→비즈니스 구축을 연결한 $4M+ 사업 모델.', prompt: 'Dickie Bush와 Nicolas Cole의 "Ship 30 for 30" 비즈니스 모델을 분석해줘. 코호트 기반 글쓰기 프로그램의 설계, 가격 전략($350~$1,500 티어), 트위터 기반 마케팅, 졸업생→앰배서더→재구매 플라이휠, 그리고 이 모델을 AI 교육 분야에 적용해서 "30일 AI 활용 챌린지" 같은 프로그램을 만들 수 있는 구체적 계획을 세워줘.' },
+  { cat: '콘텐츠', title: '온라인 글쓰기 코호트로 $10M+ 매출', person: 'David Perell', desc: '"Write of Passage" 코호트로 연 $10M+. 에세이와 팟캐스트로 오디언스를 구축하고, 5주 라이브 코호트(₩600만)를 프리미엄 가격에 판매하는 모델.', prompt: 'David Perell의 "Write of Passage" 코호트 비즈니스를 분석해줘. $4,000~$6,000 가격대의 프리미엄 코호트를 어떻게 포지셔닝하고 판매하는지, 무료 에세이→팟캐스트→이메일 시퀀스→세일즈 콜 퍼널, 코호트 커리큘럼 설계, 그리고 동문 네트워크를 활용한 리퍼럴 시스템을 구체적으로 알려줘.' },
+  { cat: '콘텐츠', title: 'Second Brain 방법론으로 $8M 교육 사업', person: 'Tiago Forte', desc: '"Building a Second Brain" 책과 코호트 코스로 PKM(개인지식관리)을 비즈니스화. 방법론 브랜딩→책→코스→인증 프로그램까지 확장한 지식 수익화의 정석.', prompt: 'Tiago Forte의 "Building a Second Brain" 비즈니스 모델을 분석해줘. 블로그 글→온라인 코호트($1,500)→베스트셀러 책→인증 프로그램으로 확장한 전략, PARA 방법론의 브랜딩과 IP화, 그리고 나의 "Space×AI 지식관리" 방법론을 같은 방식으로 브랜딩하고 수익화할 수 있는 구체적 계획을 세워줘.' },
+  // --- 프로덕트 수익화 ---
+  { cat: '프로덕트', title: '인디해커 SaaS로 월 $200K MRR', person: 'Pieter Levels', desc: 'NomadList, RemoteOK 등을 혼자 만들어 월 $200K+. "12 startups in 12 months" 컨셉으로 빠른 출시→검증→반복의 린 솔로프리너 모델의 원조.', prompt: 'Pieter Levels의 인디해커 전략을 분석해줘. "12 startups in 12 months" 실행법, NomadList/RemoteOK의 수익 모델, 기술 스택 최소화(vanilla JS, SQLite), 마케팅 없이 프로덕트만으로 성장하는 전략, 그리고 AI 도구 활용 분야에서 1인 SaaS 프로덕트를 만들 수 있는 아이디어를 5개 제안해줘.' },
+  { cat: '프로덕트', title: 'ShipFast 보일러플레이트로 월 $80K', person: 'Marc Lou', desc: 'Next.js 보일러플레이트 "ShipFast"를 $199에 판매해 월 $80K 수익. 개발자가 만든 개발자 도구를 Twitter 마케팅으로 성장시킨 인디 프로덕트 전략.', prompt: 'Marc Lou의 ShipFast 비즈니스 모델을 분석해줘. 보일러플레이트 프로덕트의 가격 전략($199 일회성), Twitter/X 기반 빌드인퍼블릭 마케팅, 랜딩페이지 전환 최적화, 그리고 AI 에이전트/자동화 분야에서 비슷한 보일러플레이트나 스타터킷 프로덕트를 만들어 판매할 수 있는 구체적 아이디어를 제안해줘.' },
+  { cat: '프로덕트', title: '디지털 프로덕트 가치 사다리 전략', person: 'Jack Butcher (Visualize Value)', desc: '$10 디자인 에셋에서 시작해 $1,000 코스, $10,000 컨설팅까지 가격 사다리 구축. 심플한 비주얼 콘텐츠를 IP화하여 다양한 가격대의 제품 라인업을 만든 전략.', prompt: 'Jack Butcher의 "Visualize Value" 비즈니스 모델을 분석해줘. $10 에셋→$100 번들→$1,000 코스→$10,000 컨설팅 가격 사다리, 미니멀 비주얼 콘텐츠의 IP화, NFT 실험, 그리고 나의 AI 그림노트 콘텐츠를 같은 방식으로 가치 사다리를 만들어 수익화하는 구체적 계획을 세워줘.' },
+  { cat: '프로덕트', title: '$100M Offers 프레임워크', person: 'Alex Hormozi', desc: '"거절할 수 없는 오퍼 만들기" — 가격이 아닌 가치로 승부. 번들링, 보너스 스태킹, 리스크 리버설로 10배 가치 인식을 만드는 전략. 저서가 전세계 솔로프리너의 교과서가 됨.', prompt: 'Alex Hormozi의 "$100M Offers" 프레임워크를 내 비즈니스(AI 교육, 공유오피스 컨설팅)에 적용하는 방법을 알려줘. Value Equation(Dream Outcome × Perceived Likelihood / Time Delay × Effort), 거절 불가 오퍼 설계법, 번들링+보너스 스태킹, 가격 앵커링, 리스크 리버설(환불 보장) 전략을 구체적으로 적용한 3가지 오퍼를 설계해줘.' },
+  { cat: '프로덕트', title: '노션 템플릿으로 월 $100K+ 수익', person: 'Easlo, Thomas Frank', desc: 'Notion 파워유저들이 고품질 템플릿을 Gumroad/자체 사이트에서 판매해 월 $100K 이상 수익. 무료 템플릿으로 리드 확보→유료 프리미엄 업셀 전략.', prompt: 'Easlo, Thomas Frank 등 노션 템플릿 크리에이터들의 수익화 전략을 분석해줘. 무료 템플릿→이메일 캡처→유료 템플릿 퍼널, Gumroad vs 자체 사이트 비교, 가격 전략($19~$149), 번들 패키지, 유튜브/트위터 마케팅, 그리고 나의 AI 실무활용 노션 템플릿을 월 ₩500만 이상 판매할 수 있는 구체적 실행 계획을 세워줘.' },
+  { cat: '프로덕트', title: '마이크로 SaaS로 월 $50K MRR', person: 'Danny Postma', desc: 'AI 기반 마이크로 SaaS(Headlime, ProfilePicture.AI 등)를 빠르게 출시하여 합산 월 $50K+. 하나가 아닌 포트폴리오 전략으로 리스크를 분산.', prompt: 'Danny Postma의 마이크로 SaaS 포트폴리오 전략을 분석해줘. AI 기반 도구를 빠르게 출시하는 방법, 여러 개의 작은 SaaS를 운영하는 포트폴리오 접근법, 각 프로덕트의 수익 모델, 그리고 AI 에이전트/자동화 분야에서 내가 만들 수 있는 마이크로 SaaS 아이디어 5개와 구체적 출시 계획을 세워줘.' },
+  // --- 커뮤니티 & 오디언스 ---
+  { cat: '커뮤니티', title: '유료 커뮤니티로 월 $500K MRR', person: 'Sam Parr & Shaan Puri (Hampton)', desc: '"Hampton" — 연 매출 $1M+ 창업자 전용 프리미엄 커뮤니티. 연회비 $8,500. 엄격한 입회 심사로 희소성을 만들고, 소규모 그룹 마스터마인드로 가치를 극대화.', prompt: 'Hampton 커뮤니티의 비즈니스 모델을 분석해줘. 연 $8,500 프리미엄 가격 책정, 엄격한 입회 심사로 희소성 창출, 소규모 마스터마인드 그룹 운영, 오프라인 이벤트, 그리고 나의 "모닝 AI 포럼"을 프리미엄 유료 커뮤니티로 전환할 수 있는 구체적 계획을 세워줘. 가격 티어(무료/월 ₩19,000/연 ₩190,000), 차별화 전략, 온보딩 시퀀스를 포함해줘.' },
+  { cat: '커뮤니티', title: 'Circle/School 기반 멤버십 수익화', person: 'Pat Flynn (SPI)', desc: '"Smart Passive Income" — 팟캐스트로 오디언스를 구축하고, SPI Pro 커뮤니티(월 $99)로 전환. 무료 콘텐츠→유료 커뮤니티→코스→이벤트 플라이휠.', prompt: 'Pat Flynn의 SPI(Smart Passive Income) 커뮤니티 수익화 모델을 분석해줘. 팟캐스트→무료 콘텐츠→이메일 리스트→SPI Pro 유료 커뮤니티(월 $99)→코스→연간 이벤트 퍼널, Circle 플랫폼 활용법, 커뮤니티 리텐션 전략, 그리고 이 모델을 나의 AI 교육 커뮤니티에 적용하는 구체적 실행 계획을 세워줘.' },
+  { cat: '커뮤니티', title: 'Skool 플랫폼으로 커뮤니티 수익화', person: 'Alex Hormozi (Skool Games)', desc: 'Skool 플랫폼에서 무료 커뮤니티를 만들고, 게이미피케이션으로 인게이지먼트를 높인 뒤 유료 전환. 월 $99 커뮤니티들이 월 $100K+ 수익을 달성하는 사례 다수.', prompt: 'Skool 플랫폼 기반 커뮤니티 수익화 전략을 분석해줘. Alex Hormozi의 Skool Games 모델, 게이미피케이션(포인트, 레벨, 리더보드) 시스템, 무료→유료 전환 퍼널, 성공 사례 분석, 그리고 나의 AI 교육 커뮤니티를 Skool에서 운영하여 월 ₩1,000만 수익을 만들 수 있는 구체적 계획을 세워줘.' },
+  { cat: '커뮤니티', title: '이메일 리스트 100만으로 연 $10M', person: 'Nathan Barry (ConvertKit)', desc: 'ConvertKit 창업자 본인이 크리에이터 이코노미의 교과서. 이메일 리스트의 가치를 극대화하는 전략 — "이메일 리스트가 곧 비즈니스"라는 철학.', prompt: 'Nathan Barry의 이메일 리스트 수익화 전략과 ConvertKit 크리에이터 성공 사례를 분석해줘. 이메일 리스트가 SNS보다 강력한 이유, 리드 마그넷 설계법, 이메일 시퀀스 자동화, 뉴스레터→유료 상품 전환 전략, 그리고 내가 AI 교육 뉴스레터를 0에서 시작해 1,000명→5,000명→10,000명으로 성장시키는 단계별 실행 계획을 세워줘.' },
+  // --- 자동화 & 시스템 ---
+  { cat: '자동화', title: 'AI + 자동화로 1인 기업 10배 레버리지', person: 'Greg Isenberg', desc: '"1인 AI 에이전시" 컨셉 — AI 도구 스택(ChatGPT, Claude, Midjourney, Make, Zapier)으로 10인분의 업무를 처리. 콘텐츠 생산, 고객 응대, 마케팅을 자동화하는 솔로프리너 2.0 전략.', prompt: 'AI와 자동화 도구를 활용한 1인 기업 레버리지 전략을 상세히 알려줘. ChatGPT/Claude로 콘텐츠 생산 자동화, Make/n8n으로 워크플로우 자동화, AI 챗봇으로 고객 응대, 이메일 시퀀스 자동화, SNS 스케줄링 자동화 등. 나의 AI 교육+컨설팅 사업에서 구체적으로 어떤 자동화를 구축하면 주 40시간→주 15시간으로 줄이면서 매출은 3배로 늘릴 수 있는지 구체적 계획을 세워줘.' },
+  { cat: '자동화', title: '콘텐츠 재활용 시스템 (1→10 변환)', person: 'Gary Vaynerchuk', desc: '"Content Model" — 1개의 핵심 콘텐츠(영상/강연)를 10개 이상의 마이크로 콘텐츠로 재가공. 솔로프리너가 적은 노력으로 모든 채널에 존재감을 유지하는 시스템.', prompt: 'Gary Vee의 콘텐츠 재활용 시스템을 나의 AI 교육 사업에 맞게 구체적으로 설계해줘. 1개의 주간 AI 인사이트 영상/글에서 → LinkedIn 포스트 3개 + Instagram 카드뉴스 2개 + 트위터 스레드 1개 + 뉴스레터 1편 + 숏폼 3개 + 블로그 SEO 글 1편으로 변환하는 구체적 워크플로우, 도구(Descript, Canva, Claude, Make), 주간 시간표를 만들어줘.' },
+  { cat: '자동화', title: '시스템 사고로 "자유의 비즈니스" 구축', person: 'Sam Carpenter (Work the System)', desc: '비즈니스의 모든 반복 업무를 SOP(표준운영절차)로 문서화하고, 자동화하거나 위임. 주 80시간→주 2시간으로 줄이면서 수익은 유지한 체계적 접근법.', prompt: 'Sam Carpenter의 "Work the System" 방법론을 내 솔로프리너 사업에 적용하는 구체적 방법을 알려줘. 반복 업무 식별→SOP 문서화→자동화/위임 우선순위 매트릭스, AI 도구를 활용한 SOP 자동 생성, 나의 주간 업무(콘텐츠 제작, 교육 운영, 컨설팅, 마케팅, 행정)를 분석해서 자동화할 것, AI에 위임할 것, 직접 할 것을 분류해줘.' },
+  { cat: '자동화', title: '이메일 자동화 시퀀스로 잠자는 동안 판매', person: 'Ramit Sethi', desc: '정교한 이메일 자동화 시퀀스로 리드→교육→판매를 자동화. 1번 설정하면 반복적으로 수익을 만드는 "에버그린 퍼널" 전략.', prompt: 'Ramit Sethi의 이메일 자동화 판매 전략을 분석해줘. 리드 마그넷→웰컴 시퀀스→가치 제공 시퀀스→세일즈 시퀀스→업셀 시퀀스의 구체적 이메일 템플릿, 각 시퀀스의 이메일 수와 발송 간격, A/B 테스트 방법, 그리고 나의 AI 교육 프로그램을 위한 에버그린 이메일 퍼널을 구체적으로 설계해줘. 이메일 제목과 구조 예시를 포함해줘.' },
+  // --- 브랜딩 & 포지셔닝 ---
+  { cat: '브랜딩', title: '"1인 기업" 브랜드 프레임워크', person: 'Dan Koe', desc: '"The One-Person Business" 철학 — 개인 브랜드를 자산으로 구축하고, 지식을 제품화하여 시간 자유와 수입을 동시에 달성. 250만 구독자를 가진 솔로프리너 아이콘.', prompt: 'Dan Koe의 1인 기업 브랜드 구축 프레임워크를 분석해줘. "개인의 지식이 곧 비즈니스" 철학, 유튜브+트위터+뉴스레터 삼각 시스템, 디지털 코스 "Modern Mastery"의 가격과 론칭 전략, 개인 브랜드→코스→코칭→소프트웨어 확장 로드맵, 그리고 나(Chance, Space×AI 전문가)의 개인 브랜드를 Dan Koe 모델로 구축하는 구체적 90일 계획을 세워줘.' },
+  { cat: '브랜딩', title: '카테고리 오브 원 — 독보적 포지셔닝', person: 'Naval Ravikant', desc: '"특정 지식(Specific Knowledge)"을 기반으로 대체 불가능한 포지셔닝을 구축. 코드와 미디어를 레버리지로 사용해 시간 판매에서 벗어나는 전략.', prompt: 'Naval Ravikant의 "Specific Knowledge" 개념과 레버리지 이론을 내 사업에 적용해줘. 나의 고유한 교차점(공유오피스 10년 + AI 교육 + 크리에이터 경험)을 분석해서 대체 불가능한 포지셔닝을 설계해줘. "코드와 미디어의 레버리지"를 실제로 어떻게 구현할 수 있는지, 그리고 "시간을 팔지 않는 비즈니스 모델"로 전환하는 구체적 단계를 알려줘.' },
+  { cat: '브랜딩', title: '크리에이터 → 교육자 → CEO 진화 전략', person: 'Chris Do (The Futur)', desc: '디자이너에서 교육 크리에이터로, 다시 미디어 CEO로 진화. "The Futur" 유튜브 채널(260만 구독자)을 기반으로 코스, 코칭, 컨설팅 사업을 구축한 전략.', prompt: 'Chris Do의 "The Futur" 비즈니스 진화 전략을 분석해줘. 프리랜서 디자이너→유튜브 교육자→프리미엄 코칭($35,000/년)→비즈니스 커뮤니티로의 진화 과정, 무료 유튜브 콘텐츠로 신뢰 구축→고가 코칭 판매 전략, 그리고 나의 진화 로드맵(컨설턴트→AI 교육자→솔로프리너 CEO)을 구체적으로 설계해줘.' },
+  { cat: '브랜딩', title: 'Atomic Habits식 방법론 IP 구축', person: 'James Clear', desc: '블로그 글쓰기에서 시작해 "Atomic Habits"라는 방법론을 브랜드화. 책 1,500만부 판매 + 뉴스레터 200만 구독. 단순한 프레임워크를 강력한 IP로 만든 전략.', prompt: 'James Clear가 "Atomic Habits" 방법론을 어떻게 IP화하여 거대한 비즈니스를 만들었는지 분석해줘. 블로그→뉴스레터→책→강연→라이선싱 확장 전략, 단순하고 반복 가능한 프레임워크(1% 개선, 습관 스태킹 등)의 힘, 그리고 나의 "AI 업무혁신" 방법론을 같은 방식으로 IP화하여 책, 코스, 강연으로 확장하는 구체적 계획을 세워줘.' },
+  { cat: '브랜딩', title: '"반대편에 서기" 컨트래리언 포지셔닝', person: 'Codie Sanchez', desc: '"Contrarian Thinking" — 주류와 반대되는 관점으로 차별화. "지루한 비즈니스를 사라"는 메시지로 독보적 포지션을 구축하고 240만 팔로워와 투자 펀드를 만든 전략.', prompt: 'Codie Sanchez의 컨트래리언 포지셔닝 전략을 분석해줘. 주류 의견에 반대되는 콘텐츠로 차별화하는 방법, "Contrarian Thinking" 브랜딩, 뉴스레터→유료 코스→투자 펀드 퍼널, 그리고 나의 AI 교육 분야에서 "AI는 사람을 대체하지 않는다" 같은 컨트래리언 포지션을 잡아 차별화할 수 있는 구체적 메시지와 콘텐츠 전략을 제안해줘.' },
+  // --- 세일즈 & 론칭 ---
+  { cat: '세일즈', title: '런칭 포뮬러 — 제프 워커식 제품 론칭', person: 'Jeff Walker', desc: '"Product Launch Formula" — 사전 캠페인→가치 시퀀스→오픈카트→마감 긴급성으로 디지털 프로덕트를 론칭하는 검증된 공식. 수천 명의 솔로프리너가 이 공식으로 수십만 달러 론칭을 달성.', prompt: 'Jeff Walker의 Product Launch Formula를 나의 AI 교육 코스 론칭에 적용해줘. Pre-Launch(시드 런칭)→PLC 시퀀스(무료 가치 콘텐츠 3편)→오픈 카트(3~7일 한정)→마감 긴급성 전략을 구체적으로 설계해줘. 각 단계별 이메일/콘텐츠 스크립트, 타임라인, 그리고 첫 론칭에서 ₩5,000만 이상 매출을 달성할 수 있는 계획을 세워줘.' },
+  { cat: '세일즈', title: '웨비나 퍼널로 자동 판매 시스템 구축', person: 'Russell Brunson', desc: '"Perfect Webinar" 공식 — 60분 웨비나로 교육+판매를 동시에. 녹화 웨비나를 자동 퍼널로 돌려 매일 판매가 일어나는 시스템. ClickFunnels 창업자의 핵심 전략.', prompt: 'Russell Brunson의 "Perfect Webinar" 공식을 나의 AI 교육 세일즈에 적용해줘. 60분 웨비나 구성(Origin Story→3 Secrets→Stack→Close), 에버그린 웨비나 자동 퍼널 설계, 랜딩페이지→등록→리마인더→웨비나→후속 이메일 시퀀스, 그리고 "AI 업무 자동화 마스터클래스" 웨비나 대본과 슬라이드 구조를 구체적으로 만들어줘.' },
+  { cat: '세일즈', title: '트리플 다운 세일즈 — 저가→고가 업셀', person: 'Hormozi (Value Ladder)', desc: '무료 리드 마그넷→₩3만 미니 코스→₩30만 풀 코스→₩300만 코호트→₩3,000만 1:1 컨설팅. 각 단계에서 신뢰를 쌓고 자연스럽게 상위 상품으로 전환하는 가치 사다리 전략.', prompt: '가치 사다리(Value Ladder) 전략을 내 AI 교육 사업에 구체적으로 적용해줘. 무료(리드 마그넷 PDF)→₩29,000(노션 템플릿)→₩99,000(온라인 코스)→₩590,000(6주 코호트)→₩3,000,000(1:1 컨설팅) 각 단계별 제품 설계, 업셀 트리거 포인트, 자동화 가능한 부분, 그리고 고객이 자연스럽게 사다리를 올라가게 만드는 이메일+콘텐츠 전략을 세워줘.' },
+  { cat: '세일즈', title: '한정판 & 희소성 마케팅 전략', person: '다수 솔로프리너', desc: '코호트 정원 30명, 얼리버드 48시간, 연 2회만 오픈 등 "진짜 희소성"으로 전환율 극대화. FOMO(놓칠 것에 대한 두려움)를 윤리적으로 활용하는 전략.', prompt: '희소성과 긴급성 마케팅 전략을 내 교육 사업에 윤리적으로 적용하는 방법을 알려줘. 정원 제한(진짜 소수 정예), 시간 제한(오픈 기간 한정), 가격 단계(얼리버드→정가→프리미엄), 론칭 카운트다운, 대기자 명단 전략, 그리고 AI 코호트 프로그램의 구체적 론칭 캘린더와 커뮤니케이션 시퀀스를 설계해줘.' },
+  // --- 스케일링 전략 ---
+  { cat: '스케일링', title: '1인 → AI 팀 체제로 10배 성장', person: '2025-26 트렌드', desc: '실제 직원 없이 AI 에이전트로 팀을 구성. 콘텐츠 AI, 리서치 AI, 고객응대 AI, 회계 AI 등으로 1인 기업의 처리 능력을 10배로 확장하는 차세대 솔로프리너 전략.', prompt: 'AI 에이전트를 활용한 1인 기업 확장 전략을 구체적으로 설계해줘. Claude Code로 개발 업무, Claude/GPT로 콘텐츠 제작, AI 챗봇으로 고객 응대, n8n/Make로 업무 자동화, AI로 데이터 분석 등. 현재 내 업무(AI 교육, 콘텐츠 제작, 컨설팅, 커뮤니티 운영, 행정)를 분석하고, AI 에이전트 "팀원" 구성표(역할, 도구, 비용)를 만들어줘.' },
+  { cat: '스케일링', title: '라이선싱 & 인증 프로그램으로 확장', person: 'Tiago Forte, Tony Robbins', desc: '자신의 방법론을 다른 사람이 가르칠 수 있도록 인증 프로그램을 만들어 확장. 시간을 쓰지 않고 IP가 수익을 만드는 궁극의 레버리지 모델.', prompt: '인증/라이선스 프로그램 비즈니스 모델을 분석해줘. Tiago Forte의 BASB 인증 코치 프로그램, Tony Robbins의 코치 양성, StoryBrand의 가이드 인증 등 사례를 바탕으로. 나의 "AI 업무 혁신" 방법론을 인증 프로그램으로 만들어 다른 강사가 가르칠 수 있게 하는 구체적 설계(커리큘럼, 가격, 인증 기준, 수익 배분)를 만들어줘.' },
+  { cat: '스케일링', title: '강연 & 기업 교육으로 고수익 다각화', person: 'Simon Sinek 모델', desc: '책/콘텐츠로 전문성을 증명하고, 기업 강연(회당 $50K~$100K)과 기업 교육 프로그램으로 고수익을 창출. 1인 브랜드의 최고가 수익 모델.', prompt: '강연 & 기업 교육으로 수익을 다각화하는 전략을 구체적으로 알려줘. 전문 강연 시장 진입 방법(강연 에이전시, 직접 영업), 기업 교육 프로그램 제안서 작성법, 가격 책정(무료→₩100만→₩500만→₩1,000만), 강연 포트폴리오 구축, 그리고 "AI 시대의 업무 혁신" 주제로 기업 강연/교육 프로그램 3가지를 구체적으로 설계해줘.' },
+  { cat: '스케일링', title: '서브스택 유료 구독으로 MRR 구축', person: 'Lenny Rachitsky', desc: '"Lenny\'s Newsletter" — PM/제품 분야 유료 뉴스레터로 연 $1M+. 무료 콘텐츠로 오디언스 구축 후 유료 전환(월 $15). 솔로프리너의 가장 안정적인 반복매출 모델.', prompt: 'Lenny Rachitsky의 유료 뉴스레터 비즈니스 모델을 분석해줘. Substack에서 무료→유료 전환 전략, 유료 구독자를 유지하는 콘텐츠 품질 기준, 월 $15 가격대의 근거, 팟캐스트와의 시너지, 그리고 나의 "Space×AI Weekly" 뉴스레터를 유료 구독 모델로 만들어 월 ₩500만 MRR을 달성할 수 있는 구체적 계획을 세워줘.' },
+  { cat: '스케일링', title: '마스터마인드 그룹으로 고가 수익 창출', person: ' 다수 (EO, YPO 모델)', desc: '소수(8~12명) 동료 그룹이 정기적으로 모여 서로의 비즈니스를 점검하는 마스터마인드. 월 ₩30~100만 가격대로 솔로프리너의 고수익+저노력 모델.', prompt: '마스터마인드 그룹 비즈니스를 내가 운영할 수 있는 구체적 방법을 알려줘. 참여자 선발 기준, 그룹 크기(8~12명), 진행 포맷(핫시트, 목표 리뷰, 자원 공유), 가격 책정(월 ₩50만~100만), 온/오프라인 하이브리드 운영, 그리고 "AI 비즈니스 마스터마인드" 프로그램을 설계하고 첫 참여자를 모집하는 구체적 계획을 세워줘.' },
+  { cat: '스케일링', title: '책 출판으로 권위 + 리드 제너레이션', person: 'Authority Publishing 전략', desc: '책은 돈을 벌기 위한 게 아니라 "최고의 명함". $10 책이 $10,000 컨설팅 계약을 가져오는 레버리지 전략. Amazon KDP로 1인 출판도 가능.', prompt: '솔로프리너를 위한 책 출판 전략을 분석해줘. 전통 출판 vs 자가 출판(Amazon KDP) 비교, 책 출판이 비즈니스에 미치는 레버리지 효과(강연 섭외, 컨설팅 계약, 미디어 노출), 베스트셀러 전략, 그리고 나의 "AI 시대의 1인 기업" 책을 기획해줘. 목차 구성, 각 장의 핵심 내용, 출판 로드맵, 프로모션 전략을 구체적으로 만들어줘.' },
+];
+
+const stratCategories = ['전체', '콘텐츠', '프로덕트', '커뮤니티', '자동화', '브랜딩', '세일즈', '스케일링'];
+
+// =====================================================
+// COMPUTED VALUES
+// =====================================================
+const totalDomains = domains.length;
+const blindspotCount = domains.filter(d => d.score < 50).length;
+const coverageScore = Math.round(domains.reduce((s, d) => s + d.score, 0) / (totalDomains * 100) * 100);
+const totalRevenueOpportunity = blindspots.reduce((s, b) => s + b.revenueImpact, 0);
+const avgProductReadiness = Math.round(contentProducts.reduce((s, p) => s + p.readiness, 0) / contentProducts.length);
+
+const tabs = [
+  { id: 'overview', label: '📊 종합 레이더' },
+  { id: 'blindspots', label: '🔴 사각지대 상세' },
+  { id: 'revenue', label: '💰 수익 파이프라인' },
+  { id: 'solopreneur', label: '🚀 솔로프리너 마케팅전략' },
+  { id: 'checklist', label: '✅ 학습 체크리스트' },
+  { id: 'plan', label: '🗓 4주 액션플랜' },
+];
+
+// =====================================================
+// RENDER FUNCTIONS
+// =====================================================
+function renderSummary() {
+  const el = document.getElementById('summaryStrip');
+  el.innerHTML = `
+    <div class="summary-card">
+      <div class="num" style="color:var(--accent);">${totalDomains}</div>
+      <div class="label">전체 도메인</div>
+    </div>
+    <div class="summary-card">
+      <div class="num" style="color:var(--red);">${blindspotCount}</div>
+      <div class="label">사각지대</div>
+    </div>
+    <div class="summary-card">
+      <div class="num" style="color:${coverageScore >= 70 ? 'var(--green)' : coverageScore >= 50 ? 'var(--yellow)' : 'var(--red)'};">${coverageScore}%</div>
+      <div class="label">지식 커버리지</div>
+    </div>
+    <div class="summary-card highlight">
+      <div class="num" style="color:var(--purple);">₩${(totalRevenueOpportunity / 10000).toFixed(1)}억</div>
+      <div class="label">연 수익 기회</div>
+    </div>
+    <div class="summary-card">
+      <div class="num" style="color:var(--cyan);">${avgProductReadiness}%</div>
+      <div class="label">제품 준비도</div>
+    </div>
+  `;
+}
+
+function renderTabs() {
+  const el = document.getElementById('tabBar');
+  el.innerHTML = tabs.map((t, i) =>
+    `<button class="tab${i === 0 ? ' active' : ''}" data-panel="${t.id}" onclick="showPanel('${t.id}', this)">${t.label}</button>`
+  ).join('');
+}
+
+function renderDomains() {
+  const wrap = document.getElementById('domainList');
+  wrap.innerHTML = domains.map(d => {
+    const barColor = d.score >= 80 ? 'var(--green)' : d.score >= 60 ? 'var(--yellow)' : d.score >= 45 ? 'var(--orange)' : 'var(--red)';
+    return `<div class="domain-item">
+      <div class="name">${d.name} <span style="font-size:11px;color:var(--text-dim);font-weight:300;margin-left:6px;">${d.status}</span></div>
+      <div class="bar-wrap"><div class="bar" style="width:${d.score}%;background:${barColor}"></div></div>
+      <div class="pct" style="color:${barColor}">${d.score}</div>
+    </div>`;
+  }).join('');
+}
+
+function bsCard(b) {
+  const colors = {
+    critical: { bar: 'var(--red)', bg: 'var(--red-dim)', label: '긴급' },
+    warning: { bar: 'var(--yellow)', bg: 'var(--yellow-dim)', label: '주의' },
+    info: { bar: 'var(--cyan)', bg: 'var(--cyan-dim)', label: '참고' }
+  };
+  const c = colors[b.severity];
+  const revLabel = b.revenueImpact > 0 ? `₩${(b.revenueImpact / 10000).toFixed(1)}억/년` : '간접효과';
+  return `<div class="bs-card" data-severity="${b.severity}" data-revenue="${b.revenueImpact}" data-score="${b.score}">
+    <div class="severity" style="background:${c.bar}"></div>
+    <div class="bs-header">
+      <div class="bs-title">${b.title}</div>
+      <div class="bs-tag" style="background:${c.bg};color:${c.bar}">${c.label}</div>
+    </div>
+    <div class="bs-desc">${b.desc}</div>
+    <div class="bs-meta">
+      <div class="bs-action">${b.action}</div>
+      <div class="bs-revenue">${revLabel}</div>
+    </div>
+  </div>`;
+}
+
+function renderBlindspots() {
+  const critical = blindspots.filter(b => b.severity === 'critical');
+  const warning = blindspots.filter(b => b.severity === 'warning' || b.severity === 'info');
+  document.getElementById('criticalGrid').innerHTML = critical.map(b => bsCard(b)).join('');
+  document.getElementById('improveGrid').innerHTML = warning.map(b => bsCard(b)).join('');
+  document.getElementById('allBlindspotsGrid').innerHTML = blindspots.map(b => bsCard(b)).join('');
+}
+
+function renderChecklist() {
+  const wrap = document.getElementById('checklistWrap');
+  const saved = loadChecklistState();
+  const colors = {
+    critical: { bg: 'var(--red-dim)', color: 'var(--red)', label: '긴급' },
+    high: { bg: 'var(--orange-dim)', color: 'var(--orange)', label: '높음' },
+    medium: { bg: 'var(--yellow-dim)', color: 'var(--yellow)', label: '보통' },
+    low: { bg: 'var(--cyan-dim)', color: 'var(--cyan)', label: '낮음' }
+  };
+  wrap.innerHTML = checklistItems.map((item, i) => {
+    const c = colors[item.priority];
+    const checked = saved.includes(i) ? ' checked' : '';
+    return `<div class="check-item${checked}" data-idx="${i}" onclick="toggleCheck(this)">
+      <div class="check-box"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2"><path d="M2 6l3 3 5-5"/></svg></div>
+      <div>${item.text} <span style="font-size:11px;color:var(--text-dim);margin-left:4px;">[${item.domain}]</span></div>
+      <div class="check-revenue">${item.revenue}</div>
+      <div class="check-priority" style="background:${c.bg};color:${c.color}">${c.label}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderTimeline() {
+  const wrap = document.getElementById('timelineWrap');
+  wrap.innerHTML = actionPlan.map(t => `<div class="tl-item">
+    <div class="tl-week">${t.week}</div>
+    <div class="tl-title">${t.title}</div>
+    <div class="tl-desc">${t.desc}</div>
+    <div class="tl-tags">${t.tags.map(tag => `<span class="tl-tag">${tag}</span>`).join('')}</div>
+    <div class="tl-revenue">💰 ${t.revenue}</div>
+  </div>`).join('');
+}
+
+function renderRevenuePanel() {
+  // Summary cards
+  const liveProducts = contentProducts.filter(p => p.status === 'live').length;
+  const plannedProducts = contentProducts.filter(p => p.status !== 'live').length;
+  document.getElementById('revSummary').innerHTML = `
+    <div class="rev-summary-card">
+      <div class="rev-num" style="color:var(--purple);">₩${(totalRevenueOpportunity / 10000).toFixed(1)}억</div>
+      <div class="rev-sub">연간 수익 기회</div>
+    </div>
+    <div class="rev-summary-card">
+      <div class="rev-num" style="color:var(--green);">${liveProducts} <span style="font-size:16px;color:var(--text-dim);">/ ${contentProducts.length}</span></div>
+      <div class="rev-sub">운영중 제품</div>
+    </div>
+    <div class="rev-summary-card">
+      <div class="rev-num" style="color:var(--cyan);">${avgProductReadiness}%</div>
+      <div class="rev-sub">평균 제품 준비도</div>
+    </div>
+  `;
+
+  // Revenue bar chart (sorted by impact)
+  const sorted = [...blindspots].filter(b => b.revenueImpact > 0).sort((a, b) => b.revenueImpact - a.revenueImpact);
+  const maxRev = Math.max(...sorted.map(b => b.revenueImpact));
+  document.getElementById('revenueBarChart').innerHTML = sorted.map(b => {
+    const pct = (b.revenueImpact / maxRev * 100).toFixed(0);
+    const shortName = b.domain.length > 14 ? b.domain.substring(0, 14) + '..' : b.domain;
+    return `<div class="rev-bar-item">
+      <div class="rev-label">${shortName}</div>
+      <div class="rev-bar-wrap"><div class="rev-bar" style="width:${pct}%"></div></div>
+      <div class="rev-amount">₩${(b.revenueImpact).toLocaleString()}만</div>
+    </div>`;
+  }).join('');
+
+  // Revenue funnel
+  const statusLabels = { live: '운영중', plan: '기획중', wip: '진행중', none: '미구축' };
+  const statusClasses = { live: 'status-live', plan: 'status-plan', wip: 'status-wip', none: 'status-none' };
+  document.getElementById('revenueFunnel').innerHTML = revenueFunnel.map(f => `
+    <div class="funnel-stage">
+      <div class="funnel-shape"><div class="funnel-bar" style="width:${f.width}%"></div></div>
+      <div class="funnel-info">
+        <div class="funnel-name">${f.stage}</div>
+        <div class="funnel-target">${f.desc} · 목표: ${f.target}</div>
+      </div>
+      <div class="funnel-status product-status ${statusClasses[f.statusType]}">${statusLabels[f.statusType]}</div>
+    </div>
+  `).join('');
+
+  // Product table
+  document.getElementById('productTable').innerHTML = `
+    <thead><tr>
+      <th>제품명</th><th>유형</th><th>가격</th><th>플랫폼</th><th>상태</th><th>준비도</th><th>월 목표 매출</th>
+    </tr></thead>
+    <tbody>${contentProducts.map(p => {
+      const statusLabels = { live: '운영중', plan: '기획중', wip: '진행중', none: '미시작' };
+      const statusClasses = { live: 'status-live', plan: 'status-plan', wip: 'status-wip', none: 'status-none' };
+      return `<tr>
+        <td style="font-weight:600;">${p.name}</td>
+        <td style="color:var(--text-dim);">${p.type}</td>
+        <td><span style="font-family:'JetBrains Mono';font-size:12px;">${p.price}</span></td>
+        <td style="color:var(--text-dim);font-size:12px;">${p.platform}</td>
+        <td><span class="product-status ${statusClasses[p.status]}">${statusLabels[p.status]}</span></td>
+        <td>
+          <span class="product-progress-wrap"><span class="product-progress-bar" style="width:${p.readiness}%;background:${p.readiness >= 70 ? 'var(--green)' : p.readiness >= 40 ? 'var(--yellow)' : 'var(--accent)'}"></span></span>
+          <span class="product-progress-pct">${p.readiness}%</span>
+        </td>
+        <td style="font-family:'JetBrains Mono';font-size:12px;color:var(--green);">${p.revenue}</td>
+      </tr>`;
+    }).join('')}</tbody>
+  `;
+
+  // Knowledge-Revenue Map
+  document.getElementById('knowledgeRevenueMap').innerHTML = knowledgeRevenueMap.map(m => `
+    <div class="kr-map-item">
+      <div class="kr-knowledge">${m.knowledge}</div>
+      <div class="kr-arrow">→</div>
+      <div class="kr-product">${m.product}</div>
+      <div class="kr-arrow">→</div>
+      <div class="kr-revenue">${m.revenue}</div>
+    </div>
+  `).join('');
+}
+
+function renderStrategies(filterCat) {
+  const catColors = {
+    '콘텐츠': { bg: 'var(--cyan-dim)', color: 'var(--cyan)' },
+    '프로덕트': { bg: 'var(--purple-dim)', color: 'var(--purple)' },
+    '커뮤니티': { bg: 'var(--green-dim)', color: 'var(--green)' },
+    '자동화': { bg: 'var(--orange-dim)', color: 'var(--orange)' },
+    '브랜딩': { bg: 'var(--accent-glow)', color: 'var(--accent)' },
+    '세일즈': { bg: 'var(--red-dim)', color: 'var(--red)' },
+    '스케일링': { bg: 'var(--yellow-dim)', color: 'var(--yellow)' },
+  };
+
+  // Filters
+  const active = filterCat || '전체';
+  document.getElementById('stratFilterBar').innerHTML = stratCategories.map(c =>
+    `<button class="strat-filter-btn${c === active ? ' active' : ''}" onclick="renderStrategies('${c}')">${c} ${c === '전체' ? '(' + soloStrategies.length + ')' : '(' + soloStrategies.filter(s => s.cat === c).length + ')'}</button>`
+  ).join('');
+
+  const filtered = active === '전체' ? soloStrategies : soloStrategies.filter(s => s.cat === active);
+  document.getElementById('stratGrid').innerHTML = filtered.map((s, i) => {
+    const cc = catColors[s.cat] || { bg: 'rgba(255,255,255,0.05)', color: 'var(--text-dim)' };
+    const globalIdx = soloStrategies.indexOf(s) + 1;
+    const escapedPrompt = s.prompt.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    return `<div class="strat-card">
+      <div class="strat-num">#${String(globalIdx).padStart(2, '0')}</div>
+      <div class="strat-cat" style="background:${cc.bg};color:${cc.color}">${s.cat}</div>
+      <div class="strat-title">${s.title}</div>
+      <div class="strat-case">${s.person}</div>
+      <div class="strat-desc">${s.desc}</div>
+      <div class="strat-btns">
+        <button class="copy-open-btn claude" onclick="copyAndOpen('${escapedPrompt}', 'claude')">복사 후 Claude 열기</button>
+        <button class="copy-open-btn gpt" onclick="copyAndOpen('${escapedPrompt}', 'gpt')">복사 후 GPT 열기</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function copyAndOpen(text, platform) {
+  const decoded = text.replace(/&quot;/g, '"').replace(/\\'/g, "'");
+  navigator.clipboard.writeText(decoded).then(() => {
+    if (platform === 'gpt') {
+      // ChatGPT: ?q= 파라미터로 프롬프트 자동 입력
+      window.open('https://chatgpt.com/?hints=search&q=' + encodeURIComponent(decoded), '_blank');
+    } else {
+      // Claude: URL 파라미터 미지원 → 클립보드 복사 후 이동
+      const toast = document.getElementById('copyToast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+      window.open('https://claude.ai/new', '_blank');
+    }
+  });
+}
+
+// =====================================================
+// INTERACTIONS
+// =====================================================
+function showPanel(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  saveChecklistState();
+  updateProgress();
+}
+
+function saveChecklistState() {
+  const checked = [];
+  document.querySelectorAll('.check-item.checked').forEach(el => {
+    checked.push(parseInt(el.dataset.idx));
+  });
+  localStorage.setItem('pkm-checklist-v2', JSON.stringify(checked));
+}
+
+function loadChecklistState() {
+  try {
+    return JSON.parse(localStorage.getItem('pkm-checklist-v2')) || [];
+  } catch { return []; }
+}
+
+function updateProgress() {
+  const total = checklistItems.length;
+  const done = document.querySelectorAll('.check-item.checked').length;
+  document.getElementById('progressLabel').textContent = `${done} / ${total} 완료`;
+  drawProgressRing(done / total);
+}
+
+function filterBlindspots(severity, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const grid = document.getElementById('allBlindspotsGrid');
+  const cards = grid.querySelectorAll('.bs-card');
+  cards.forEach(card => {
+    if (severity === 'all' || card.dataset.severity === severity) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+function sortBlindspots(sortBy) {
+  const grid = document.getElementById('allBlindspotsGrid');
+  let sorted;
+  if (sortBy === 'revenue') {
+    sorted = [...blindspots].sort((a, b) => b.revenueImpact - a.revenueImpact);
+  } else if (sortBy === 'score') {
+    sorted = [...blindspots].sort((a, b) => a.score - b.score);
+  } else {
+    const order = { critical: 0, warning: 1, info: 2 };
+    sorted = [...blindspots].sort((a, b) => order[a.severity] - order[b.severity]);
+  }
+  grid.innerHTML = sorted.map(b => bsCard(b)).join('');
+  // Re-apply filter
+  const activeFilter = document.querySelector('.filter-btn.active');
+  if (activeFilter && activeFilter.dataset.filter !== 'all') {
+    filterBlindspots(activeFilter.dataset.filter, activeFilter);
+  }
+}
+
+// =====================================================
+// CANVAS: Progress Ring
+// =====================================================
+function drawProgressRing(pct) {
+  const canvas = document.getElementById('progressRing');
+  const ctx = canvas.getContext('2d');
+  const s = 2;
+  canvas.width = 160 * s;
+  canvas.height = 160 * s;
+  ctx.scale(s, s);
+  const cx = 80, cy = 80, r = 60, lw = 10;
+
+  ctx.clearRect(0, 0, 160, 160);
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  ctx.strokeStyle = '#2a2a3a';
+  ctx.lineWidth = lw;
+  ctx.stroke();
+
+  if (pct > 0) {
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * pct);
+    ctx.strokeStyle = pct > 0.7 ? '#22c55e' : pct > 0.3 ? '#eab308' : '#6366f1';
+    ctx.lineWidth = lw;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+  }
+
+  ctx.fillStyle = '#e8e8f0';
+  ctx.font = '700 28px Noto Sans KR';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(Math.round(pct * 100) + '%', cx, cy);
+}
+
+// =====================================================
+// CANVAS: Radar Chart
+// =====================================================
+function drawRadar() {
+  const canvas = document.getElementById('radarChart');
+  const ctx = canvas.getContext('2d');
+  const s = 2;
+  const W = 480;
+  canvas.width = W * s;
+  canvas.height = W * s;
+  ctx.scale(s, s);
+
+  const cx = W / 2, cy = W / 2, maxR = 170;
+  const data = domains.map(d => d.score / 100);
+  const n = data.length;
+
+  // Grid rings
+  for (let ring = 1; ring <= 4; ring++) {
+    const r = maxR * (ring / 4);
+    ctx.beginPath();
+    for (let i = 0; i <= n; i++) {
+      const angle = (Math.PI * 2 * i) / n - Math.PI / 2;
+      const x = cx + r * Math.cos(angle);
+      const y = cy + r * Math.sin(angle);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Ring labels
+    if (ring < 4) {
+      ctx.fillStyle = 'rgba(255,255,255,0.2)';
+      ctx.font = '500 11px JetBrains Mono';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText((ring * 25) + '', cx + 4, cy - r + 14);
+    }
+  }
+
+  // Danger zone fill (below 50%)
+  const dangerR = maxR * 0.5;
+  ctx.beginPath();
+  for (let i = 0; i <= n; i++) {
+    const angle = (Math.PI * 2 * (i % n)) / n - Math.PI / 2;
+    const x = cx + dangerR * Math.cos(angle);
+    const y = cy + dangerR * Math.sin(angle);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.fillStyle = 'rgba(239,68,68,0.04)';
+  ctx.fill();
+
+  // Axis lines
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i) / n - Math.PI / 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + maxR * Math.cos(angle), cy + maxR * Math.sin(angle));
+    ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Data polygon
+  ctx.beginPath();
+  for (let i = 0; i <= n; i++) {
+    const idx = i % n;
+    const angle = (Math.PI * 2 * idx) / n - Math.PI / 2;
+    const r = maxR * data[idx];
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.fillStyle = 'rgba(99,102,241,0.14)';
+  ctx.fill();
+  ctx.strokeStyle = '#6366f1';
+  ctx.lineWidth = 2.5;
+  ctx.lineJoin = 'round';
+  ctx.stroke();
+
+  // Data points + full labels
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i) / n - Math.PI / 2;
+    const r = maxR * data[i];
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+
+    // Glow
+    ctx.beginPath();
+    ctx.arc(x, y, 10, 0, Math.PI * 2);
+    ctx.fillStyle = domains[i].color + '25';
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, Math.PI * 2);
+    ctx.fillStyle = domains[i].color;
+    ctx.fill();
+
+    // Full label
+    const labelDist = maxR + 24;
+    const lx = cx + labelDist * Math.cos(angle);
+    const ly = cy + labelDist * Math.sin(angle);
+    ctx.fillStyle = 'rgba(255,255,255,0.65)';
+    ctx.font = '500 11px Noto Sans KR';
+    if (Math.abs(angle + Math.PI / 2) < 0.15 || Math.abs(angle - Math.PI / 2) < 0.15) {
+      ctx.textAlign = 'center';
+    } else if (angle > -Math.PI / 2 && angle < Math.PI / 2) {
+      ctx.textAlign = 'left';
+    } else {
+      ctx.textAlign = 'right';
+    }
+    ctx.textBaseline = 'middle';
+    ctx.fillText(domains[i].name, lx, ly);
+
+    // Score near label
+    const scoreDist = labelDist + 4;
+    const sx = cx + scoreDist * Math.cos(angle);
+    const sy = cy + scoreDist * Math.sin(angle) + 14;
+    ctx.fillStyle = domains[i].color;
+    ctx.font = '600 10px JetBrains Mono';
+    ctx.fillText(domains[i].score + '점', sx, sy);
+  }
+}
+
+// =====================================================
+// INIT
+// =====================================================
+renderSummary();
+renderTabs();
+renderDomains();
+renderBlindspots();
+renderChecklist();
+renderTimeline();
+renderRevenuePanel();
+renderStrategies('전체');
+drawRadar();
+drawProgressRing(loadChecklistState().length / checklistItems.length);
+updateProgress();
+</script>
+</body>
+</html>
