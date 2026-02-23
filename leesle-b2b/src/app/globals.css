@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-cream: #F5F0EB;
+  --color-brand-beige: #E8DFD5;
+  --color-brand-gold: #C4A265;
+  --color-brand-gold-dark: #A8893F;
+  --color-brand-dark: #2C2C2C;
+  --color-brand-gray: #8C8C8C;
+  --color-brand-white: #FFFFFF;
+
+  --font-family-pretendard: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-family-inter: Inter, "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--color-brand-dark);
+  background: var(--color-brand-cream);
+  font-family: var(--font-family-pretendard);
+}
+
+/* Section spacing utility */
+.section-gap {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+@media (min-width: 768px) {
+  .section-gap {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
+
+.container-site {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (min-width: 1280px) {
+  .container-site {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* Marquee animation for TrustLogoBanner */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Bounce animation for scroll indicator */
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-fade-in-up,
+  .animate-bounce-slow {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

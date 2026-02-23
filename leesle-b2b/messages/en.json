@@ -1,0 +1,197 @@
+{
+  "Metadata": {
+    "title": "LEESLE B2B | Korean Aesthetic Corporate Goods Partner",
+    "description": "B2B goods & accessories partner chosen by Samsung, Olive Young, Kia and more. From custom quotes to delivery."
+  },
+  "Nav": {
+    "catalog": "Catalog",
+    "cases": "Case Studies",
+    "custom": "Custom Production",
+    "brand": "Brand Story",
+    "resources": "Resources",
+    "faq": "FAQ",
+    "quote": "Get a Quote",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "Footer": {
+    "tagline": "Korean-aesthetic corporate goods & accessories B2B partner",
+    "quickLinks": "Quick Links",
+    "contact": "Contact",
+    "email": "Email: b2b@leesle.com",
+    "phone": "Phone: +82-2-1234-5678",
+    "quoteInquiry": "Get a Quote",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "Hero": {
+    "headline1": "Korean Aesthetics,",
+    "headline2": "Corporate Value",
+    "subheadline": "Trusted by 50+ enterprises including Samsung, Olive Young, Kia",
+    "subheadline2": "Your B2B Goods Partner",
+    "ctaPrimary": "Get a Custom Quote",
+    "ctaSecondary": "View Catalog"
+  },
+  "TrustBanner": {
+    "label": "Trusted Partners"
+  },
+  "CategoryLinks": {
+    "title": "Categories",
+    "goods": "Goods",
+    "accessory": "Accessories",
+    "seasonal": "Seasonal Limited"
+  },
+  "FeaturedCases": {
+    "title": "Featured Case Studies",
+    "viewAll": "View All"
+  },
+  "Stats": {
+    "partnerBrands": "Partner Brands",
+    "producedItems": "Items Produced",
+    "satisfaction": "Satisfaction Rate"
+  },
+  "BottomCTA": {
+    "title": "Start Your Custom Quote Today",
+    "subtitle": "A dedicated manager will contact you within 24 hours",
+    "cta": "Get a Free Quote"
+  },
+  "Cases": {
+    "pageTitle": "Case Studies",
+    "pageDescription": "Bringing corporate stories to life with Korean aesthetics",
+    "metaTitle": "Case Studies | LEESLE B2B",
+    "metaDescription": "Explore B2B collaboration cases with Samsung, Olive Young, Kia and more."
+  },
+  "Products": {
+    "pageTitle": "Product Catalog",
+    "pageDescription": "Browse LEESLE's B2B products. Custom production is also available.",
+    "all": "All",
+    "goods": "Goods",
+    "accessory": "Accessories",
+    "seasonal": "Seasonal Limited",
+    "customizableLabel": "Customizable",
+    "filterAll": "All",
+    "filterCustomizableYes": "Customizable",
+    "filterCustomizableNo": "Non-customizable",
+    "productCount": "{count} products",
+    "moq": "MOQ",
+    "pieces": "+",
+    "material": "Material",
+    "size": "Size",
+    "loading": "Loading...",
+    "quoteInquiry": "Request Quote"
+  },
+  "Quote": {
+    "pageTitle": "Request a Quote",
+    "pageDescription": "Inquire about LEESLE's B2B custom production services.",
+    "pageDescription2": "We'll respond within 24 hours.",
+    "requiredInfo": "Required Information",
+    "companyName": "Company Name",
+    "companyPlaceholder": "e.g.) Samsung Electronics",
+    "contactName": "Contact Person",
+    "contactPlaceholder": "e.g.) Jane Kim",
+    "contactInfo": "Contact (Phone or Email)",
+    "contactInfoPlaceholder": "e.g.) 010-1234-5678 or b2b@company.com",
+    "additionalInfo": "Additional Information",
+    "optional": "(Optional)",
+    "categoryLabel": "Categories of Interest",
+    "quantity": "Quantity",
+    "purpose": "Purpose",
+    "deadline": "Desired Delivery Date",
+    "notes": "Additional Notes",
+    "notesPlaceholder": "Please describe the products, design concept, custom requirements, etc.",
+    "submitting": "Submitting...",
+    "submit": "Submit Quote Request",
+    "afterSubmit": "A manager will respond within 24 hours of submission.",
+    "networkError": "A network error occurred. Please try again.",
+    "serverError": "An error occurred. Please try again.",
+    "partners": "Total Partners",
+    "responseTime": "Response Guaranteed",
+    "satisfactionRate": "Satisfaction Rate",
+    "loading": "Loading..."
+  },
+  "QuoteConfirmation": {
+    "title": "Your Quote Request Has Been Submitted",
+    "description": "A dedicated manager will contact you within 24 hours.",
+    "altContactTitle": "For faster consultation",
+    "kakao": "KakaoTalk Chat",
+    "phone": "Phone: +82-2-1234-5678",
+    "backHome": "Back to Home"
+  },
+  "Brand": {
+    "headline1": "Korean Beauty in Everyday Life,",
+    "brandName": "LEESLE",
+    "description": "LEESLE reinterprets Korean traditional aesthetics for the modern era, delivering unique value to enterprises and brands.",
+    "philosophyTitle": "Brand Philosophy",
+    "philosophy1": "We believe the unique beauty of Korean traditional crafts and aesthetics can shine in modern everyday life.",
+    "philosophy2": "All LEESLE products pursue harmony between tradition and modernity. We utilize traditional Korean materials and techniques—knots, embroidery, hanji, dancheong—while maintaining modern design sensibility and practicality.",
+    "philosophy3": "For our enterprise partners, we co-create not just products, but brand experiences infused with Korean identity.",
+    "designProcessTitle": "Design Process",
+    "researchTitle": "Research",
+    "researchDesc": "Deep research into Korean traditional aesthetics and modern trends to establish design foundations.",
+    "designTitle": "Design",
+    "designDesc": "We propose designs that reinterpret traditional elements in a modern way, refined together with our partners.",
+    "productionTitle": "Production",
+    "productionDesc": "Combining skilled artisanship with cutting-edge technology to create high-quality products.",
+    "mediaTitle": "Media & Awards",
+    "ctaTitle": "Start a Special Project with LEESLE",
+    "ctaDescription": "B2B custom production with Korean aesthetics. Contact us today.",
+    "ctaButton": "Request a Quote"
+  },
+  "Custom": {
+    "pageTitle": "Custom Production Guide",
+    "pageDescription": "LEESLE provides custom production services tailored to your brand identity.",
+    "processTitle": "Production Process",
+    "step1Title": "Consultation & Planning",
+    "step1Desc": "We discuss brand concept, purpose, budget, and quantity. A dedicated designer is assigned to propose a custom plan.",
+    "step2Title": "Design Drafts",
+    "step2Desc": "We create 2-3 design drafts based on the plan. Final design is confirmed after incorporating your feedback.",
+    "step3Title": "Sample Production",
+    "step3Desc": "Physical samples are produced from the confirmed design. You can verify materials, colors, and finishes in person.",
+    "step4Title": "Mass Production",
+    "step4Desc": "After sample approval, mass production begins. Quality control ensures delivery on the promised schedule.",
+    "step5Title": "Delivery & After-Sales",
+    "step5Desc": "Safely packaged and delivered to your designated location. After-sales service and reorders are supported.",
+    "midCtaTitle": "Ready to Start Custom Production?",
+    "midCtaDesc": "An idea is all you need. LEESLE takes care of the rest.",
+    "midCtaButton": "Request a Quote",
+    "scopeTitle": "Customization Scope",
+    "logoTitle": "Logo Engraving",
+    "logoDesc": "Apply corporate logos through laser engraving, silk printing, embroidery, and more.",
+    "colorTitle": "Color Customization",
+    "colorDesc": "Color matching to your brand palette. Precise colors achieved via Pantone codes.",
+    "packageTitle": "Package Customization",
+    "packageDesc": "Gift boxes, shopping bags, ribbons, wrapping paper—complete packaging tailored to your brand.",
+    "moqTitle": "MOQ & Lead Time",
+    "tableProductType": "Product Type",
+    "tableMinQty": "Minimum Qty",
+    "tableLeadTime": "Lead Time",
+    "moqNote": "* Lead times are calculated from design confirmation and may vary based on quantity and complexity.",
+    "bottomCtaTitle": "Start Custom Production Now",
+    "bottomCtaDesc": "LEESLE's expert team supports you end-to-end from planning to delivery. We'll respond within 24 hours.",
+    "bottomCtaButton": "Request Free Consultation"
+  },
+  "FAQ": {
+    "pageTitle": "Frequently Asked Questions",
+    "pageDescription": "Common questions about B2B orders and production.",
+    "ctaTitle": "Have more questions?",
+    "ctaDescription": "Feel free to reach out anytime. We'll respond within 24 hours.",
+    "ctaButton": "Contact Us"
+  },
+  "Resources": {
+    "pageTitle": "Resource Center",
+    "pageDescription": "Download LEESLE B2B catalogs, brand books, and lookbooks.",
+    "all": "All",
+    "catalog": "Catalog",
+    "brandbook": "Brand Book",
+    "lookbook": "Lookbook",
+    "emailRequired": "🔒 Email required",
+    "emailPlaceholder": "Enter email",
+    "downloadSent": "✓ Download link sent to your email",
+    "receive": "Get",
+    "download": "Download"
+  },
+  "LanguageSwitcher": {
+    "ko": "한국어",
+    "en": "English"
+  }
+}

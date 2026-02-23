@@ -1,0 +1,197 @@
+{
+  "Metadata": {
+    "title": "LEESLE B2B | 한국적 감성의 기업 맞춤 굿즈 파트너",
+    "description": "삼성, 올리브영, 기아 등 대기업이 선택한 한국 감성 굿즈·액세서리 B2B 파트너. 맞춤 견적부터 납품까지."
+  },
+  "Nav": {
+    "catalog": "카탈로그",
+    "cases": "협업 사례",
+    "custom": "맞춤 제작",
+    "brand": "브랜드 스토리",
+    "resources": "자료실",
+    "faq": "FAQ",
+    "quote": "견적 문의",
+    "openMenu": "메뉴 열기",
+    "closeMenu": "메뉴 닫기"
+  },
+  "Footer": {
+    "tagline": "한국적 감성을 담은 기업 맞춤 굿즈·액세서리 B2B 파트너",
+    "quickLinks": "바로가기",
+    "contact": "문의하기",
+    "email": "이메일: b2b@leesle.com",
+    "phone": "전화: 02-1234-5678",
+    "quoteInquiry": "견적 문의하기",
+    "privacy": "개인정보처리방침",
+    "terms": "이용약관"
+  },
+  "Hero": {
+    "headline1": "한국의 감성을",
+    "headline2": "기업의 가치로",
+    "subheadline": "삼성, 올리브영, 기아 등 50여 기업이 선택한",
+    "subheadline2": "B2B 굿즈 파트너",
+    "ctaPrimary": "맞춤 견적 받기",
+    "ctaSecondary": "카탈로그 보기"
+  },
+  "TrustBanner": {
+    "label": "함께한 브랜드"
+  },
+  "CategoryLinks": {
+    "title": "카테고리",
+    "goods": "굿즈",
+    "accessory": "액세서리",
+    "seasonal": "시즌 한정"
+  },
+  "FeaturedCases": {
+    "title": "주요 협업 사례",
+    "viewAll": "전체 보기"
+  },
+  "Stats": {
+    "partnerBrands": "협업 브랜드",
+    "producedItems": "제작 아이템",
+    "satisfaction": "고객 만족도"
+  },
+  "BottomCTA": {
+    "title": "지금 맞춤 견적을 시작해보세요",
+    "subtitle": "24시간 내 전담 매니저가 연락드립니다",
+    "cta": "무료 견적 받기"
+  },
+  "Cases": {
+    "pageTitle": "협업 사례",
+    "pageDescription": "기업의 스토리를 한국적 감성으로 전합니다",
+    "metaTitle": "협업 사례 | LEESLE B2B",
+    "metaDescription": "삼성, 올리브영, 기아 등 대기업과의 B2B 협업 사례를 확인하세요."
+  },
+  "Products": {
+    "pageTitle": "제품 카탈로그",
+    "pageDescription": "LEESLE의 B2B 제품을 둘러보세요. 맞춤 커스텀 제작도 가능합니다.",
+    "all": "전체",
+    "goods": "굿즈",
+    "accessory": "액세서리",
+    "seasonal": "시즌 한정",
+    "customizableLabel": "커스텀 가능",
+    "filterAll": "전체",
+    "filterCustomizableYes": "커스텀 가능",
+    "filterCustomizableNo": "커스텀 불가",
+    "productCount": "{count}개 제품",
+    "moq": "MOQ",
+    "pieces": "개~",
+    "material": "소재",
+    "size": "사이즈",
+    "loading": "로딩 중...",
+    "quoteInquiry": "견적 문의하기"
+  },
+  "Quote": {
+    "pageTitle": "견적 문의",
+    "pageDescription": "LEESLE의 B2B 맞춤 제작 서비스에 대해 문의해주세요.",
+    "pageDescription2": "24시간 내 담당자가 회신드립니다.",
+    "requiredInfo": "필수 정보",
+    "companyName": "회사명",
+    "companyPlaceholder": "예) 삼성전자",
+    "contactName": "담당자명",
+    "contactPlaceholder": "예) 김지영",
+    "contactInfo": "연락처 (전화번호 또는 이메일)",
+    "contactInfoPlaceholder": "예) 010-1234-5678 또는 b2b@company.com",
+    "additionalInfo": "추가 정보",
+    "optional": "(선택)",
+    "categoryLabel": "관심 카테고리",
+    "quantity": "수량",
+    "purpose": "용도",
+    "deadline": "희망 납기일",
+    "notes": "추가 요청사항",
+    "notesPlaceholder": "원하시는 제품, 디자인 컨셉, 커스텀 요구사항 등을 자유롭게 작성해주세요.",
+    "submitting": "접수 중...",
+    "submit": "견적 문의하기",
+    "afterSubmit": "문의 접수 후 24시간 내 담당자가 회신드립니다.",
+    "networkError": "네트워크 오류가 발생했습니다. 다시 시도해주세요.",
+    "serverError": "오류가 발생했습니다. 다시 시도해주세요.",
+    "partners": "누적 파트너사",
+    "responseTime": "내 회신 보장",
+    "satisfactionRate": "고객 만족도",
+    "loading": "로딩 중..."
+  },
+  "QuoteConfirmation": {
+    "title": "견적 문의가 접수되었습니다",
+    "description": "24시간 내 담당 매니저가 연락드립니다.",
+    "altContactTitle": "빠른 상담을 원하시면",
+    "kakao": "카카오톡 상담",
+    "phone": "전화 상담: 02-1234-5678",
+    "backHome": "홈으로 돌아가기"
+  },
+  "Brand": {
+    "headline1": "한국의 멋을 일상으로,",
+    "brandName": "LEESLE",
+    "description": "LEESLE는 한국 전통 미학을 현대적으로 재해석하여, 기업과 브랜드에 특별한 가치를 전달합니다.",
+    "philosophyTitle": "브랜드 철학",
+    "philosophy1": "우리는 한국의 전통 공예와 미학이 가진 고유한 아름다움이 현대인의 일상에서도 충분히 빛날 수 있다고 믿습니다.",
+    "philosophy2": "LEESLE의 모든 제품은 전통과 현대의 조화를 추구합니다. 매듭, 자수, 한지, 단청 등 한국 고유의 소재와 기법을 활용하면서도, 현대적 감각의 디자인과 실용성을 겸비합니다.",
+    "philosophy3": "기업 파트너에게는 단순한 제품이 아닌, 한국적 정체성을 담은 브랜드 경험을 함께 만들어갑니다.",
+    "designProcessTitle": "디자인 프로세스",
+    "researchTitle": "리서치",
+    "researchDesc": "한국 전통 미학과 현대 트렌드를 깊이 연구하여 디자인의 근거를 마련합니다.",
+    "designTitle": "디자인",
+    "designDesc": "전통 요소를 현대적으로 재해석한 디자인을 제안하고, 파트너와 함께 완성합니다.",
+    "productionTitle": "제작",
+    "productionDesc": "숙련된 장인과 최신 기술을 결합하여 높은 품질의 제품을 만듭니다.",
+    "mediaTitle": "미디어 & 수상",
+    "ctaTitle": "LEESLE와 함께 특별한 프로젝트를 시작하세요",
+    "ctaDescription": "한국의 멋을 담은 B2B 맞춤 제작, 지금 상담하세요.",
+    "ctaButton": "견적 문의하기"
+  },
+  "Custom": {
+    "pageTitle": "맞춤 제작 가이드",
+    "pageDescription": "LEESLE는 기업의 브랜드 아이덴티티에 맞는 맞춤 제작 서비스를 제공합니다.",
+    "processTitle": "제작 프로세스",
+    "step1Title": "상담 및 기획",
+    "step1Desc": "브랜드 컨셉, 용도, 예산, 수량을 논의합니다. 담당 디자이너가 배정되어 맞춤 기획안을 제안합니다.",
+    "step2Title": "디자인 시안",
+    "step2Desc": "기획안을 바탕으로 2-3가지 디자인 시안을 제작합니다. 피드백을 반영하여 최종 디자인을 확정합니다.",
+    "step3Title": "샘플 제작",
+    "step3Desc": "확정된 디자인으로 실물 샘플을 제작합니다. 소재, 색상, 마감을 직접 확인하실 수 있습니다.",
+    "step4Title": "대량 생산",
+    "step4Desc": "샘플 승인 후 대량 생산에 들어갑니다. 품질 관리를 거쳐 약속된 일정에 맞춰 납품합니다.",
+    "step5Title": "납품 및 A/S",
+    "step5Desc": "안전 포장 후 지정 장소로 납품합니다. 납품 후에도 A/S와 재주문을 지원합니다.",
+    "midCtaTitle": "맞춤 제작을 시작하고 싶으신가요?",
+    "midCtaDesc": "아이디어만 있으면 충분합니다. 나머지는 LEESLE가 함께합니다.",
+    "midCtaButton": "견적 문의하기",
+    "scopeTitle": "커스텀 범위",
+    "logoTitle": "로고 각인",
+    "logoDesc": "레이저 각인, 실크 프린팅, 자수 등 다양한 방식으로 기업 로고를 적용합니다.",
+    "colorTitle": "색상 커스텀",
+    "colorDesc": "브랜드 컬러에 맞춘 색상 매칭이 가능합니다. Pantone 코드 기반으로 정확한 색상을 구현합니다.",
+    "packageTitle": "패키지 커스텀",
+    "packageDesc": "선물 박스, 쇼핑백, 리본, 포장지 등 패키지 전체를 브랜드에 맞게 제작합니다.",
+    "moqTitle": "MOQ & 제작 기간",
+    "tableProductType": "제품 유형",
+    "tableMinQty": "최소 수량",
+    "tableLeadTime": "제작 기간",
+    "moqNote": "* 제작 기간은 디자인 확정 후 기준이며, 수량과 난이도에 따라 변동될 수 있습니다.",
+    "bottomCtaTitle": "지금 맞춤 제작을 시작하세요",
+    "bottomCtaDesc": "LEESLE의 전문 팀이 기획부터 납품까지 원스톱으로 지원합니다. 24시간 내 회신드립니다.",
+    "bottomCtaButton": "무료 상담 신청하기"
+  },
+  "FAQ": {
+    "pageTitle": "자주 묻는 질문",
+    "pageDescription": "B2B 주문과 관련하여 자주 묻는 질문들을 모았습니다.",
+    "ctaTitle": "더 궁금한 점이 있으신가요?",
+    "ctaDescription": "언제든 편하게 문의해주세요. 24시간 내 답변드립니다.",
+    "ctaButton": "문의하기"
+  },
+  "Resources": {
+    "pageTitle": "자료실",
+    "pageDescription": "LEESLE B2B 카탈로그, 브랜드북, 룩북을 다운로드하세요.",
+    "all": "전체",
+    "catalog": "카탈로그",
+    "brandbook": "브랜드북",
+    "lookbook": "룩북",
+    "emailRequired": "🔒 이메일 필요",
+    "emailPlaceholder": "이메일 입력",
+    "downloadSent": "✓ 다운로드 링크가 이메일로 전송되었습니다",
+    "receive": "받기",
+    "download": "다운로드"
+  },
+  "LanguageSwitcher": {
+    "ko": "한국어",
+    "en": "English"
+  }
+}
