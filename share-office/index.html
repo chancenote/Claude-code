@@ -1,0 +1,625 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NextCowork | Space × AI Innovation 컨설팅</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="logo">
+        <span class="logo-name">Next<span>Cowork</span></span>
+        <span class="logo-tag">Space × AI Innovation</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">서비스</a></li>
+        <li><a href="#why">강점</a></li>
+        <li><a href="#process">프로세스</a></li>
+        <li><a href="#credibility">실적</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <a href="#contact" class="btn-nav">무료 상담 신청</a>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="메뉴">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+  <a href="#services" onclick="toggleMenu()">서비스</a>
+  <a href="#why" onclick="toggleMenu()">강점</a>
+  <a href="#process" onclick="toggleMenu()">프로세스</a>
+  <a href="#credibility" onclick="toggleMenu()">실적</a>
+  <a href="#faq" onclick="toggleMenu()">FAQ</a>
+  <a href="#contact" onclick="toggleMenu()" style="color:var(--cyan)">무료 상담 신청 →</a>
+</div>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container" style="position:relative;z-index:2;width:100%;">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Space × AI Innovation Expert · 전주 KTX역 인근
+      </div>
+      <h1>
+        공간을 기획하고,<br>
+        <span class="line2">AI로 수익을 설계합니다</span>
+      </h1>
+      <p class="hero-sub">
+        공유오피스는 단순한 임대 사업이 아닙니다.<br>
+        <strong style="color:var(--white)">9년의 건설 PM 노하우 + 4년 4개소 직접 운영 경험</strong>을 결합한
+        국내 유일의 <em style="color:var(--cyan);font-style:normal">Space × AI 통합 컨설팅</em>으로,
+        기획부터 운영 수익화까지 원스톱으로 완성합니다.
+      </p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary">
+          <i class="fas fa-comments"></i> 컨설팅 문의하기
+        </a>
+        <a href="#services" class="btn-secondary">
+          <i class="fas fa-arrow-down"></i> 서비스 살펴보기
+        </a>
+      </div>
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-num"><span class="counter" data-target="9">0</span>년</div>
+          <div class="stat-label">건설 PM 경험</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num"><span class="counter" data-target="4">0</span>개소</div>
+          <div class="stat-label">직접 운영 거점</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num"><span class="counter" data-target="1000">0</span><span>+</span></div>
+          <div class="stat-label">누적 고객사</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num"><span class="counter" data-target="100">0</span><span>+</span></div>
+          <div class="stat-label">AI·클라우드 강의</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Decorative Visual -->
+  <div class="hero-visual">
+    <div class="visual-ring vr1"></div>
+    <div class="visual-ring vr2"></div>
+    <div class="visual-ring vr3"></div>
+    <div class="visual-center">🏢</div>
+    <div class="visual-orbit" style="animation-delay:0s">🤖</div>
+    <div class="visual-orbit vo2" style="animation-delay:-4s">☁️</div>
+    <div class="visual-orbit vo3" style="animation-delay:-2s">📊</div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- ── PAIN POINTS ── -->
+<section id="pain" class="section">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-tag">고객의 고민</span>
+      <h2 class="section-title">공유오피스 창업,<br>이런 고민이 있으신가요?</h2>
+      <p class="section-sub">수익이 나는 공유오피스와 그렇지 않은 공유오피스의 차이는 처음 설계에서 결정됩니다.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card fade-in fade-in-delay-1">
+        <span class="pain-icon">🗺️</span>
+        <div class="pain-title">입지·공간 기획 노하우 부재</div>
+        <div class="pain-desc">어떤 위치에, 어떤 크기로, 어떤 구성으로 설계해야 경쟁력 있는 공간이 될지 막막하다.</div>
+      </div>
+      <div class="pain-card fade-in fade-in-delay-2">
+        <span class="pain-icon">💸</span>
+        <div class="pain-title">수익화 전략의 불확실성</div>
+        <div class="pain-desc">임대 수익만으로는 한계가 있는데, 다양한 수익 구조를 어떻게 설계해야 할지 모른다.</div>
+      </div>
+      <div class="pain-card fade-in fade-in-delay-3">
+        <span class="pain-icon">⚙️</span>
+        <div class="pain-title">운영 시스템 구축의 어려움</div>
+        <div class="pain-desc">예약·계약·정산·CS 업무를 효율적으로 처리하는 디지털 운영 체계가 없어 인건비가 과다하다.</div>
+      </div>
+      <div class="pain-card fade-in fade-in-delay-4">
+        <span class="pain-icon">🤖</span>
+        <div class="pain-title">AI·디지털 전환 방법 불명확</div>
+        <div class="pain-desc">AI와 클라우드 도입 필요성은 알지만, 실제 공유오피스에 어떻게 적용할지 전문가가 없다.</div>
+      </div>
+      <div class="pain-card fade-in fade-in-delay-1">
+        <span class="pain-icon">🏗️</span>
+        <div class="pain-title">시공·인테리어 관리 역량 부족</div>
+        <div class="pain-desc">비용 절감과 품질 유지 사이에서 시공사와 협상하고 품질을 검수할 전문 지식이 부족하다.</div>
+      </div>
+      <div class="pain-card fade-in fade-in-delay-2">
+        <span class="pain-icon">📈</span>
+        <div class="pain-title">선례 없는 시장 개척의 두려움</div>
+        <div class="pain-desc">지방 소도시나 신규 상권에서 공유오피스 수요를 어떻게 검증하고 선점할지 막연하다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section id="services" class="section">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-tag">서비스</span>
+      <h2 class="section-title">기획부터 운영까지,<br><span class="highlight">원스톱 통합 컨설팅</span></h2>
+      <p class="section-sub">각 단계에서 발생하는 리스크를 사전에 차단하고, 최단 기간 내 수익화를 실현합니다.</p>
+    </div>
+    <div class="services-grid" style="margin-top:56px;">
+      <div class="service-card fade-in fade-in-delay-1">
+        <div class="service-badge">Phase 1</div>
+        <div class="service-icon-wrap">📍</div>
+        <div class="service-title">기획 컨설팅</div>
+        <div class="service-desc">사업 타당성과 공간 전략을 과학적으로 검증하여 실패 리스크를 원천 차단합니다.</div>
+        <ul class="service-list">
+          <li>입지 분석 및 배후 수요 조사</li>
+          <li>경쟁 공간 벤치마킹 및 차별화 전략</li>
+          <li>사업성 검토 및 투자 회수 시뮬레이션</li>
+          <li>공간 콘셉트 기획 및 타깃 고객 정의</li>
+        </ul>
+      </div>
+      <div class="service-card featured fade-in fade-in-delay-2">
+        <div class="service-badge">Phase 2</div>
+        <div class="service-icon-wrap">🏗️</div>
+        <div class="service-title">개발 컨설팅</div>
+        <div class="service-desc">9년 건설 PM 경험으로 시공 품질을 보장하고 예산 초과를 방지합니다.</div>
+        <ul class="service-list">
+          <li>시공사 선정 및 계약 협상 지원</li>
+          <li>인테리어 방향 수립 및 설계 검토</li>
+          <li>설비·IoT 시스템 최적화 설계</li>
+          <li>공사 품질 모니터링 및 준공 검수</li>
+        </ul>
+      </div>
+      <div class="service-card fade-in fade-in-delay-3">
+        <div class="service-badge">Phase 3</div>
+        <div class="service-icon-wrap">🚀</div>
+        <div class="service-title">운영 컨설팅</div>
+        <div class="service-desc">AI·클라우드 기반 운영 시스템 구축으로 비용을 절감하고 데이터 기반 수익화를 실현합니다.</div>
+        <ul class="service-list">
+          <li>AI 운영 자동화 시스템 구축</li>
+          <li>클라우드 기반 예약·정산 관리</li>
+          <li>다채널 수익화 전략 수립 및 실행</li>
+          <li>KPI 대시보드 설계 및 성과 모니터링</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Inline CTA -->
+    <div class="cta-banner fade-in" style="margin-top:48px;">
+      <h3>어느 단계든 지금 바로 시작할 수 있습니다</h3>
+      <p>기획 전이든, 이미 운영 중이든 — 현재 상황에 맞는 맞춤 컨설팅을 제공합니다</p>
+      <a href="#contact" class="btn-secondary" style="display:inline-flex;">무료 상담 신청하기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY US ── -->
+<section id="why" class="section">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-tag">핵심 경쟁력</span>
+      <h2 class="section-title">왜 <span class="highlight">NextCowork</span>인가?</h2>
+      <p class="section-sub">공간 설계와 AI 운영을 동시에 이해하는 전문가는 국내에 극소수입니다.</p>
+    </div>
+    <div class="why-grid">
+      <div class="pillar-card fade-in fade-in-delay-1">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">기획-개발-운영 원스톱 통합 컨설팅</div>
+        <div class="pillar-desc">
+          9년간 대형 건설 프로젝트를 관리한 PM 역량과 4개 공유오피스를 직접 개설·운영하며 쌓은 실전 경험이 결합됩니다.
+          컨설팅 단계별 공백 없이 일관된 전략을 실행합니다.
+        </div>
+        <div class="pillar-tags">
+          <span class="ptag">건설 PM 9년</span>
+          <span class="ptag">직접 운영 4개소</span>
+          <span class="ptag">1,000+ 고객 데이터</span>
+        </div>
+      </div>
+      <div class="pillar-card fade-in fade-in-delay-2">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">AI·클라우드 기반 최신 운영시스템 전문가</div>
+        <div class="pillar-desc">
+          금융기관·정부기관·대학에서 100회 이상 AI 강의를 진행한 전문성을 공유오피스 운영에 직접 적용합니다.
+          디지털 전환으로 운영비 절감과 데이터 기반 의사결정을 동시에 실현합니다.
+        </div>
+        <div class="pillar-tags">
+          <span class="ptag">100+ AI 강의</span>
+          <span class="ptag">청와대 자문</span>
+          <span class="ptag">금융기관 자문</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="compare-wrap fade-in">
+      <div class="compare-title">경쟁사 대비 비교</div>
+      <div style="overflow-x:auto;">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>비교 항목</th>
+              <th class="col-us">✦ NextCowork</th>
+              <th>일반 부동산 컨설팅</th>
+              <th>인테리어 업체</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>입지·사업성 분석</td>
+              <td><span class="check">✓</span> 데이터 기반</td>
+              <td><span class="check">✓</span> 기본 수준</td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>공간 기획 · 설계 감리</td>
+              <td><span class="check">✓</span> 건설 PM 수준</td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="partial">△</span> 인테리어 한정</td>
+            </tr>
+            <tr>
+              <td>운영 시스템 구축</td>
+              <td><span class="check">✓</span> AI·클라우드</td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>수익화 전략 수립</td>
+              <td><span class="check">✓</span> 실전 검증</td>
+              <td><span class="partial">△</span> 이론 중심</td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>성과 모니터링 · 개선</td>
+              <td><span class="check">✓</span> KPI 대시보드</td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>공유오피스 직접 운영 경험</td>
+              <td><span class="check">✓</span> 4개소 운영</td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS ── -->
+<section id="process" class="section">
+  <div class="container">
+    <div class="fade-in" style="text-align:center;">
+      <span class="section-tag">진행 프로세스</span>
+      <h2 class="section-title">체계적인 5단계로<br><span class="highlight">확실한 결과를 만듭니다</span></h2>
+      <p class="section-sub" style="margin:0 auto;">각 단계마다 명확한 산출물과 의사결정 기준을 제시하여 불확실성을 제거합니다.</p>
+    </div>
+    <div class="process-timeline">
+      <div class="process-step fade-in fade-in-delay-1">
+        <div class="step-circle">
+          📞
+          <div class="step-num">1</div>
+        </div>
+        <div class="step-title">무료 상담</div>
+        <div class="step-desc">현재 상황 파악 및<br>컨설팅 방향 설정</div>
+      </div>
+      <div class="process-step fade-in fade-in-delay-2">
+        <div class="step-circle">
+          🔍
+          <div class="step-num">2</div>
+        </div>
+        <div class="step-title">현황 진단</div>
+        <div class="step-desc">입지·시장·경쟁 환경<br>데이터 기반 분석</div>
+      </div>
+      <div class="process-step fade-in fade-in-delay-3">
+        <div class="step-circle">
+          🗺️
+          <div class="step-num">3</div>
+        </div>
+        <div class="step-title">전략 수립</div>
+        <div class="step-desc">사업 계획·공간 기획<br>수익 전략 설계</div>
+      </div>
+      <div class="process-step fade-in fade-in-delay-4">
+        <div class="step-circle">
+          🚀
+          <div class="step-num">4</div>
+        </div>
+        <div class="step-title">실행 지원</div>
+        <div class="step-desc">시공 관리·시스템 구축<br>오픈 마케팅 지원</div>
+      </div>
+      <div class="process-step fade-in fade-in-delay-4">
+        <div class="step-circle">
+          📊
+          <div class="step-num">5</div>
+        </div>
+        <div class="step-title">성과 모니터링</div>
+        <div class="step-desc">KPI 추적·개선 제안<br>지속 성장 관리</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CREDIBILITY ── -->
+<section id="credibility" class="section">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-tag">실적 & 신뢰</span>
+      <h2 class="section-title">숫자로 증명하는<br><span class="highlight">검증된 전문성</span></h2>
+    </div>
+    <div class="stats-bar fade-in">
+      <div class="stats-bar-item">
+        <div class="sbi-num">100+</div>
+        <div class="sbi-label">AI·클라우드 강의 실적<br>금융기관·정부기관·대학교</div>
+      </div>
+      <div class="stats-bar-item">
+        <div class="sbi-num">4개소</div>
+        <div class="sbi-label">공유오피스 직접 개설·운영<br>누적 1,000+ 고객사</div>
+      </div>
+      <div class="stats-bar-item">
+        <div class="sbi-num">9년</div>
+        <div class="sbi-label">대형 건설 프로젝트 PM 경험<br>송도국제도시 포함 주요 개발</div>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <div style="font-size:0.82rem;color:var(--gray-400);font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">주요 자문·강의 기관</div>
+      <div class="logos-row">
+        <div class="logo-box">신영증권</div>
+        <div class="logo-box">청와대(대통령실)</div>
+        <div class="logo-box">전라북도청</div>
+        <div class="logo-box">전북대학교</div>
+        <div class="logo-box">FastFive</div>
+        <div class="logo-box">지역 금융기관</div>
+        <div class="logo-box">공공기관 다수</div>
+      </div>
+    </div>
+
+    <div class="testimonials">
+      <div class="testimonial-card fade-in fade-in-delay-1">
+        <div class="stars">★★★★★</div>
+        <div class="tq">"</div>
+        <div class="t-body">
+          단순한 컨설팅이 아니라 사업 파트너를 얻은 느낌이었습니다. 입지 선정부터 시공 감리, 오픈 후 AI 운영 시스템 구축까지
+          Chance 대표님이 직접 옆에서 챙겨주셨습니다. 덕분에 예상보다 2개월 빠르게 손익분기점을 달성할 수 있었습니다.
+        </div>
+        <div class="t-author">
+          <div class="t-avatar">K</div>
+          <div>
+            <div class="t-name">김○○ 대표</div>
+            <div class="t-role">전주 프리미엄 공유오피스 창업자 / 운영 6개월 차</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in fade-in-delay-2">
+        <div class="stars">★★★★★</div>
+        <div class="tq">"</div>
+        <div class="t-body">
+          저희 회사 사옥 일부를 공유오피스로 전환하는 프로젝트였는데, 기존 부동산 컨설팅 업체와는 차원이 달랐습니다.
+          AI 예약 시스템과 클라우드 관리 도구를 도입하니 운영 인력을 절반으로 줄이면서도 고객 만족도가 올라갔습니다.
+        </div>
+        <div class="t-author">
+          <div class="t-avatar">L</div>
+          <div>
+            <div class="t-name">이○○ 이사</div>
+            <div class="t-role">중견 건설사 시설관리팀 / 복합 공간 전환 프로젝트</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section id="faq" class="section">
+  <div class="container">
+    <div class="fade-in" style="text-align:center;">
+      <span class="section-tag">자주 묻는 질문</span>
+      <h2 class="section-title">궁금한 점을 해결해드립니다</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          컨설팅 비용은 어느 정도인가요?
+          <div class="faq-icon"><i class="fas fa-plus"></i></div>
+        </div>
+        <div class="faq-a">
+          컨설팅 범위와 기간에 따라 달라지므로 정해진 단일 가격표가 없습니다. 무료 초기 상담을 통해 현황을 파악한 후,
+          기획·개발·운영 중 어느 단계부터 지원이 필요한지에 따라 맞춤 제안을 드립니다. 단계별 분리 계약도 가능하며,
+          프로젝트 성과에 연동되는 성공 보수 방식도 협의할 수 있습니다.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          전체 컨설팅 기간은 얼마나 소요되나요?
+          <div class="faq-icon"><i class="fas fa-plus"></i></div>
+        </div>
+        <div class="faq-a">
+          기획 컨설팅만 진행 시 4~8주, 개발 단계까지 포함하면 3~8개월, 운영 안정화까지 포함하면 12~18개월 정도를
+          예상합니다. 공간 규모와 기존 건물 상태, 시공 난이도에 따라 변동이 있으며, 착수 시 구체적인 마일스톤 계획을 함께 수립합니다.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          전주 이외 지역도 컨설팅이 가능한가요?
+          <div class="faq-icon"><i class="fas fa-plus"></i></div>
+        </div>
+        <div class="faq-a">
+          네, 전국 모든 지역을 대상으로 합니다. 수도권·광역시는 물론 지방 소도시 공유오피스 시장 개척 경험도 보유하고 있습니다.
+          원격 화상 미팅과 현장 방문을 병행하는 방식으로 진행하며, 지역별 시장 특성과 수요층 분석도 지원합니다.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          AI·운영 시스템 도입이 어렵지 않을까요? 디지털 역량이 낮아도 괜찮나요?
+          <div class="faq-icon"><i class="fas fa-plus"></i></div>
+        </div>
+        <div class="faq-a">
+          전혀 걱정하지 않으셔도 됩니다. 저희가 도입하는 AI·클라우드 시스템은 운영자가 쉽게 사용할 수 있도록
+          설계된 SaaS 기반 솔루션입니다. 실제 운영 스태프 교육부터 매뉴얼 작성까지 포함하며,
+          도입 초기 3개월간 운영 지원도 함께 제공합니다.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          소규모 공간(70평 이하)도 컨설팅 의뢰가 가능한가요?
+          <div class="faq-icon"><i class="fas fa-plus"></i></div>
+        </div>
+        <div class="faq-a">
+          물론입니다. NextCowork 자체 운영 공간이 70평 규모이며, 소규모 공간의 효율적 설계와 수익화 전략에
+          특히 강점이 있습니다. 오히려 소규모일수록 공간 기획과 운영 시스템의 완성도가 수익에 미치는 영향이 크기 때문에,
+          체계적인 컨설팅의 효과가 더욱 극대화됩니다.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="fade-in" style="text-align:center;">
+      <span class="section-tag">무료 상담 신청</span>
+      <h2 class="section-title">지금 바로 첫 걸음을<br><span class="highlight">시작하세요</span></h2>
+      <p class="section-sub" style="margin:0 auto;">무료 초기 상담에서 현황을 공유해주시면, 맞춤 컨설팅 방향을 제안해드립니다.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info fade-in fade-in-delay-1">
+        <h3>직접 연락하기</h3>
+        <p>빠른 상담을 원하신다면 아래 채널로 직접 연락주세요. 영업일 기준 24시간 내 응답합니다.</p>
+        <div class="contact-methods">
+          <a href="https://open.kakao.com" class="contact-method" target="_blank">
+            <i class="fas fa-comment"></i>
+            <div>
+              <div style="font-weight:600;margin-bottom:2px;">카카오톡 오픈채팅</div>
+              <div style="font-size:0.78rem;color:var(--gray-400);">가장 빠른 응답 채널</div>
+            </div>
+          </a>
+          <a href="mailto:hello@nextcowork.kr" class="contact-method">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <div style="font-weight:600;margin-bottom:2px;">hello@nextcowork.kr</div>
+              <div style="font-size:0.78rem;color:var(--gray-400);">제안서·자료 공유 가능</div>
+            </div>
+          </a>
+          <a href="tel:010-0000-0000" class="contact-method">
+            <i class="fas fa-phone"></i>
+            <div>
+              <div style="font-weight:600;margin-bottom:2px;">010-0000-0000</div>
+              <div style="font-size:0.78rem;color:var(--gray-400);">평일 09:00 – 18:00</div>
+            </div>
+          </a>
+          <div class="contact-method" style="cursor:default;">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <div style="font-weight:600;margin-bottom:2px;">전주 KTX역 인근</div>
+              <div style="font-size:0.78rem;color:var(--gray-400);">NextCowork AI Campus</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form fade-in fade-in-delay-2">
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>이름 *</label>
+              <input type="text" placeholder="홍길동" required>
+            </div>
+            <div class="form-group">
+              <label>연락처 *</label>
+              <input type="tel" placeholder="010-0000-0000" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>이메일 *</label>
+            <input type="email" placeholder="name@company.com" required>
+          </div>
+          <div class="form-group">
+            <label>문의 유형</label>
+            <select>
+              <option value="">선택해주세요</option>
+              <option>기획 컨설팅 (입지·사업성 분석)</option>
+              <option>개발 컨설팅 (시공·인테리어)</option>
+              <option>운영 컨설팅 (AI·시스템·수익화)</option>
+              <option>통합 컨설팅 (기획~운영 전체)</option>
+              <option>AI 교육·강의 의뢰</option>
+              <option>기타 문의</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>문의 내용</label>
+            <textarea placeholder="현재 상황과 필요한 도움을 간략히 설명해주세요. (예: 70평 공간 보유, 공유오피스 전환 검토 중, 예산 약 1억 원)"></textarea>
+          </div>
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <i class="fas fa-paper-plane"></i> 상담 신청 보내기
+          </button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon">🎉</div>
+          <h3>상담 신청이 완료되었습니다!</h3>
+          <p>영업일 기준 24시간 내에 연락드리겠습니다.<br>급하신 경우 카카오톡으로 연락주세요.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#hero" class="logo" style="text-decoration:none;">
+          <span class="logo-name">Next<span>Cowork</span></span>
+          <span class="logo-tag">Space × AI Innovation</span>
+        </a>
+        <p>기획부터 운영까지, AI와 공간 전문성을 결합한 대한민국 최초의 Space × AI 통합 컨설팅 기업</p>
+      </div>
+      <div class="footer-col">
+        <h4>서비스</h4>
+        <ul>
+          <li><a href="#services">기획 컨설팅</a></li>
+          <li><a href="#services">개발 컨설팅</a></li>
+          <li><a href="#services">운영 컨설팅</a></li>
+          <li><a href="#services">AI 교육·강의</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>바로가기</h4>
+        <ul>
+          <li><a href="#why">왜 NextCowork</a></li>
+          <li><a href="#process">진행 프로세스</a></li>
+          <li><a href="#credibility">실적</a></li>
+          <li><a href="#contact">무료 상담 신청</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 NextCowork. All rights reserved.</p>
+      <div class="location-badge">
+        <i class="fas fa-map-marker-alt" style="color:var(--blue);"></i>
+        전라북도 전주시 · 전주 KTX역 인근 NextCowork AI Campus
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
