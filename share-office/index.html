@@ -21,12 +21,13 @@
       </a>
       <ul class="nav-links">
         <li><a href="#services">서비스</a></li>
+        <li><a href="#spaces">적용 분야</a></li>
         <li><a href="#why">강점</a></li>
         <li><a href="#process">프로세스</a></li>
         <li><a href="#credibility">실적</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
-      <a href="#contact" class="btn-nav">무료 상담 신청</a>
+      <a href="#contact" class="btn-nav js-track-cta" data-cta-label="nav-consult">무료 상담 신청</a>
       <button class="hamburger" onclick="toggleMenu()" aria-label="메뉴">
         <span></span><span></span><span></span>
       </button>
@@ -38,11 +39,12 @@
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
   <a href="#services" onclick="toggleMenu()">서비스</a>
+  <a href="#spaces" onclick="toggleMenu()">적용 분야</a>
   <a href="#why" onclick="toggleMenu()">강점</a>
   <a href="#process" onclick="toggleMenu()">프로세스</a>
   <a href="#credibility" onclick="toggleMenu()">실적</a>
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
-  <a href="#contact" onclick="toggleMenu()" style="color:var(--cyan)">무료 상담 신청 →</a>
+  <a href="#contact" onclick="toggleMenu()" class="js-track-cta" data-cta-label="mobile-menu-consult" style="color:var(--cyan)">무료 상담 신청</a>
 </div>
 
 <!-- ── HERO ── -->
@@ -56,21 +58,19 @@
         Space × AI Innovation Expert · 전주 KTX역 인근
       </div>
       <h1>
-        공간을 기획하고,<br>
-        <span class="line2">AI로 수익을 설계합니다</span>
+        공유오피스 성공을 위한,<br>
+        <span class="line2">Space × AI 통합 컨설팅</span>
       </h1>
       <p class="hero-sub">
-        공유오피스는 단순한 임대 사업이 아닙니다.<br>
-        <strong style="color:var(--white)">9년의 건설 PM 노하우 + 4년 4개소 직접 운영 경험</strong>을 결합한
-        국내 유일의 <em style="color:var(--cyan);font-style:normal">Space × AI 통합 컨설팅</em>으로,
-        기획부터 운영 수익화까지 원스톱으로 완성합니다.
+        <strong style="color:var(--white)">9년 건설 PM + 4년 4개소 직접 운영</strong>의 실전 경험을 기반으로
+        입지 검증, 공간 기획, 운영 자동화까지 한 번에 설계합니다.
       </p>
       <div class="hero-ctas">
-        <a href="#contact" class="btn-primary">
-          <i class="fas fa-comments"></i> 컨설팅 문의하기
+        <a href="#contact" class="btn-primary js-track-cta" data-cta-label="hero-primary">
+          <i class="fas fa-comments"></i> 무료 상담 신청
         </a>
-        <a href="#services" class="btn-secondary">
-          <i class="fas fa-arrow-down"></i> 서비스 살펴보기
+        <a href="#spaces" class="btn-secondary js-track-cta" data-cta-label="hero-secondary">
+          <i class="fas fa-arrow-down"></i> 적용 분야 보기
         </a>
       </div>
       <div class="stats-row">
@@ -84,13 +84,14 @@
         </div>
         <div class="stat-item">
           <div class="stat-num"><span class="counter" data-target="1000">0</span><span>+</span></div>
-          <div class="stat-label">누적 고객사</div>
+          <div class="stat-label">누적 고객사(운영·자문 합산)</div>
         </div>
         <div class="stat-item">
           <div class="stat-num"><span class="counter" data-target="100">0</span><span>+</span></div>
-          <div class="stat-label">AI·클라우드 강의</div>
+          <div class="stat-label">AI·클라우드 강의/자문</div>
         </div>
       </div>
+      <p class="hero-proof">*수치 기준: 2017-2025년 운영·자문 프로젝트 누적 기록</p>
     </div>
   </div>
   <!-- Decorative Visual -->
@@ -166,6 +167,7 @@
         <div class="service-icon-wrap">📍</div>
         <div class="service-title">기획 컨설팅</div>
         <div class="service-desc">사업 타당성과 공간 전략을 과학적으로 검증하여 실패 리스크를 원천 차단합니다.</div>
+        <div class="service-deliverable"><strong>주요 산출물:</strong> 입지 분석 리포트 · 사업성 시뮬레이션 · 콘셉트 기획서</div>
         <ul class="service-list">
           <li>입지 분석 및 배후 수요 조사</li>
           <li>경쟁 공간 벤치마킹 및 차별화 전략</li>
@@ -178,6 +180,7 @@
         <div class="service-icon-wrap">🏗️</div>
         <div class="service-title">개발 컨설팅</div>
         <div class="service-desc">9년 건설 PM 경험으로 시공 품질을 보장하고 예산 초과를 방지합니다.</div>
+        <div class="service-deliverable"><strong>주요 산출물:</strong> 시공 실행계획서 · 예산관리표 · 준공 체크리스트</div>
         <ul class="service-list">
           <li>시공사 선정 및 계약 협상 지원</li>
           <li>인테리어 방향 수립 및 설계 검토</li>
@@ -190,6 +193,7 @@
         <div class="service-icon-wrap">🚀</div>
         <div class="service-title">운영 컨설팅</div>
         <div class="service-desc">AI·클라우드 기반 운영 시스템 구축으로 비용을 절감하고 데이터 기반 수익화를 실현합니다.</div>
+        <div class="service-deliverable"><strong>주요 산출물:</strong> 운영 SOP · 자동화 플로우 · KPI 대시보드 정의서</div>
         <ul class="service-list">
           <li>AI 운영 자동화 시스템 구축</li>
           <li>클라우드 기반 예약·정산 관리</li>
@@ -202,8 +206,187 @@
     <!-- Inline CTA -->
     <div class="cta-banner fade-in" style="margin-top:48px;">
       <h3>어느 단계든 지금 바로 시작할 수 있습니다</h3>
-      <p>기획 전이든, 이미 운영 중이든 — 현재 상황에 맞는 맞춤 컨설팅을 제공합니다</p>
-      <a href="#contact" class="btn-secondary" style="display:inline-flex;">무료 상담 신청하기 →</a>
+      <p>기획 전이든 이미 운영 중이든, 현재 상황에 맞는 맞춤 컨설팅을 제공합니다.</p>
+      <a href="#contact" class="btn-primary js-track-cta" data-cta-label="services-banner" style="display:inline-flex;">무료 상담 신청</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── SPACES : 적용 분야 ── -->
+<section id="spaces" class="section">
+  <div class="container">
+    <div class="fade-in" style="text-align:center;">
+      <span class="section-tag">적용 분야</span>
+      <h2 class="section-title">모든 공간에<br><span class="highlight">코워킹이 답입니다</span></h2>
+      <p class="section-sub" style="margin:0 auto;">공유오피스는 단순 임대 사업을 넘어, 모든 부동산 복합개발의 핵심 앵커 테넌트로 진화하고 있습니다.</p>
+    </div>
+
+    <!-- Market Insight Stats -->
+    <div class="insight-bar fade-in">
+      <div class="insight-item">
+        <div class="ii-num">$20.96B</div>
+        <div class="ii-label">글로벌 시장 규모<br><span>2025년 기준</span></div>
+      </div>
+      <div class="insight-item">
+        <div class="ii-num">17.27%</div>
+        <div class="ii-label">연평균 성장률<br><span>CAGR 2025-2031</span></div>
+      </div>
+      <div class="insight-item">
+        <div class="ii-num">63만m²</div>
+        <div class="ii-label">서울 공유오피스 면적<br><span>연 20% 이상 성장</span></div>
+      </div>
+      <div class="insight-item">
+        <div class="ii-num">55%</div>
+        <div class="ii-label">글로벌 기업<br><span>유연근무공간 도입</span></div>
+      </div>
+    </div>
+
+    <!-- Trend Highlights -->
+    <div class="trend-highlights fade-in">
+      <div class="trend-item">
+        <i class="fas fa-location-dot"></i>
+        <div>
+          <strong>Third Workplace 시대</strong>
+          <span>본사도 집도 아닌 "로컬 플렉스 스페이스" 수요 폭증</span>
+        </div>
+      </div>
+      <div class="trend-item">
+        <i class="fas fa-handshake"></i>
+        <div>
+          <strong>Asset-Light 파트너십</strong>
+          <span>빌딩 오너 투자 + 전문 운영사 관리, 윈-윈 모델 확산</span>
+        </div>
+      </div>
+      <div class="trend-item">
+        <i class="fas fa-microchip"></i>
+        <div>
+          <strong>AI 스마트 오피스</strong>
+          <span>IoT·데이터 기반 공간 관리로 운영 효율 극대화</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Space Category Cards -->
+    <div class="spaces-grid">
+      <div class="space-card fade-in fade-in-delay-1">
+        <div class="space-icon">🏢</div>
+        <div class="space-title">오피스 중심</div>
+        <div class="space-types">프라임 오피스 빌딩 · 지식산업센터 · 섹션오피스</div>
+        <div class="space-desc">A급 빌딩의 공실 관리부터 지식산업센터의 스타트업 유치까지. 코워킹은 오피스 자산의 가치를 높이고 테넌트 믹스를 다양화하는 핵심 앵커입니다.</div>
+        <div class="space-tags">
+          <span class="stag">공실률 관리</span>
+          <span class="stag">빌딩 가치 상승</span>
+        </div>
+      </div>
+
+      <div class="space-card fade-in fade-in-delay-2">
+        <div class="space-icon">🏙️</div>
+        <div class="space-title">주거 복합</div>
+        <div class="space-types">주상복합 · 코리빙(Coliving) · 오피스텔</div>
+        <div class="space-desc">주거동 저층부 코워킹 라운지부터 코리빙+코워킹 통합 모델까지. 재택근무 시대, 단지 내 업무 공간은 프리미엄 차별화 요소입니다.</div>
+        <div class="space-tags">
+          <span class="stag">분양 차별화</span>
+          <span class="stag">입주민 만족</span>
+        </div>
+      </div>
+
+      <div class="space-card fade-in fade-in-delay-3">
+        <div class="space-icon">🛍️</div>
+        <div class="space-title">상업·리테일</div>
+        <div class="space-types">복합 쇼핑몰 · 스트리트형 상가</div>
+        <div class="space-desc">상업시설 내 코워킹 존은 주중 유동인구를 안정적으로 확보하고, F&B·리테일과 시너지를 만들어 상권 전체를 활성화합니다.</div>
+        <div class="space-tags">
+          <span class="stag">주중 유동인구</span>
+          <span class="stag">F&B 시너지</span>
+        </div>
+      </div>
+
+      <div class="space-card fade-in fade-in-delay-1">
+        <div class="space-icon">🏨</div>
+        <div class="space-title">호텔·숙박</div>
+        <div class="space-types">비즈니스 호텔 · 서비스드 레지던스 · 장기숙박</div>
+        <div class="space-desc">투숙객과 외부 이용자 모두에게 개방하는 호텔 코워킹은 유휴 공간을 수익화하고 비즈니스 투숙 경쟁력을 높입니다.</div>
+        <div class="space-tags">
+          <span class="stag">유휴 공간 수익화</span>
+          <span class="stag">투숙 경쟁력</span>
+        </div>
+      </div>
+
+      <div class="space-card fade-in fade-in-delay-2">
+        <div class="space-icon">🚇</div>
+        <div class="space-title">역세권·교통</div>
+        <div class="space-types">역세권 복합개발(TOD) · 공항·터미널 인근</div>
+        <div class="space-desc">대중교통 허브에 코워킹을 배치하면 위성 오피스 수요를 흡수하여 높은 입실률과 안정적 수익을 확보할 수 있습니다.</div>
+        <div class="space-tags">
+          <span class="stag">높은 접근성</span>
+          <span class="stag">위성 오피스</span>
+        </div>
+      </div>
+
+      <div class="space-card fade-in fade-in-delay-3">
+        <div class="space-icon">🔄</div>
+        <div class="space-title">도시재생</div>
+        <div class="space-types">노후 빌딩 리모델링 · 유휴 산업시설 · 공공시설 복합화</div>
+        <div class="space-desc">구도심 노후 건물과 폐공장을 크리에이티브 코워킹으로 전환하면 자산 가치를 재창출하고 지역 상권을 살릴 수 있습니다.</div>
+        <div class="space-tags">
+          <span class="stag">자산 가치 재창출</span>
+          <span class="stag">상권 활성화</span>
+        </div>
+      </div>
+
+      <div class="space-card fade-in fade-in-delay-1">
+        <div class="space-icon">🎓</div>
+        <div class="space-title">교육·문화</div>
+        <div class="space-types">대학 캠퍼스 · 컨벤션·문화시설</div>
+        <div class="space-desc">캠퍼스 내 코워킹+인큐베이터로 스타트업 생태계를 조성하고, 컨벤션센터에는 상시 업무 공간으로 공간 가동률을 극대화합니다.</div>
+        <div class="space-tags">
+          <span class="stag">산학연계</span>
+          <span class="stag">가동률 향상</span>
+        </div>
+      </div>
+
+      <div class="space-card fade-in fade-in-delay-2">
+        <div class="space-icon">🔬</div>
+        <div class="space-title">산업·물류</div>
+        <div class="space-types">물류센터 복합 · R&D 단지 · 테크 파크</div>
+        <div class="space-desc">물류센터 내 이커머스 사업자 오피스, R&D 단지 내 랩 스페이스 등 산업 특화 코워킹은 클러스터 시너지를 극대화합니다.</div>
+        <div class="space-tags">
+          <span class="stag">이커머스 시너지</span>
+          <span class="stag">클러스터 효과</span>
+        </div>
+      </div>
+
+      <div class="space-card fade-in fade-in-delay-3">
+        <div class="space-icon">🏖️</div>
+        <div class="space-title">리조트·관광</div>
+        <div class="space-types">워케이션 리조트 · 골프장·클럽하우스</div>
+        <div class="space-desc">휴양지 코워킹은 비수기를 활성화하고 디지털 노마드 수요를 흡수합니다. 골프장 비즈니스 라운지는 "플레이+미팅"의 새 경험을 제공합니다.</div>
+        <div class="space-tags">
+          <span class="stag">비수기 활성화</span>
+          <span class="stag">워케이션</span>
+        </div>
+      </div>
+
+      <div class="space-card fade-in fade-in-delay-1">
+        <div class="space-icon">🏥</div>
+        <div class="space-title">특수 목적</div>
+        <div class="space-types">의료 클러스터 · 종교시설 · 공공 유휴부지</div>
+        <div class="space-desc">병원 인접 바이오 벤처 코워킹, 종교시설 주중 유휴 공간 활용, 군부대 이전지 복합개발 등 특수 목적 공간에서도 코워킹은 최적의 앵커입니다.</div>
+        <div class="space-tags">
+          <span class="stag">특화 클러스터</span>
+          <span class="stag">지역 기여</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-in" style="text-align:center;margin-top:28px;">
+      <span style="font-size:0.72rem;color:var(--gray-600);">출처: Allwork.Space, Research and Markets, CBRE Korea, Cushman & Wakefield (2025-2026)</span>
+    </div>
+
+    <div class="cta-banner fade-in" style="margin-top:48px;">
+      <h3>어떤 공간이든, 코워킹 도입의 최적 전략을 설계합니다</h3>
+      <p>부동산 복합개발, 리모델링, 용도전환까지 어떤 프로젝트든 NextCowork가 함께합니다.</p>
+      <a href="#contact" class="btn-primary js-track-cta" data-cta-label="spaces-banner" style="display:inline-flex;">무료 상담 신청</a>
     </div>
   </div>
 </section>
@@ -247,15 +430,15 @@
 
     <!-- Comparison Table -->
     <div class="compare-wrap fade-in">
-      <div class="compare-title">경쟁사 대비 비교</div>
+      <div class="compare-title">서비스 범위 비교</div>
       <div style="overflow-x:auto;">
         <table class="compare-table">
           <thead>
             <tr>
               <th>비교 항목</th>
               <th class="col-us">✦ NextCowork</th>
-              <th>일반 부동산 컨설팅</th>
-              <th>인테리어 업체</th>
+              <th>일반 부동산 자문</th>
+              <th>인테리어 중심 업체</th>
             </tr>
           </thead>
           <tbody>
@@ -298,6 +481,7 @@
           </tbody>
         </table>
       </div>
+      <p class="compare-note">*비교 기준: 공개 제공 서비스 범위(기획·개발·운영·성과관리) 기준.</p>
     </div>
   </div>
 </section>
@@ -388,6 +572,7 @@
         <div class="logo-box">지역 금융기관</div>
         <div class="logo-box">공공기관 다수</div>
       </div>
+      <p class="logos-note">*기관 로고는 사용 승인 범위에 따라 순차적으로 실이미지로 교체 예정입니다.</p>
     </div>
 
     <div class="testimonials">
@@ -411,7 +596,7 @@
         <div class="tq">"</div>
         <div class="t-body">
           저희 회사 사옥 일부를 공유오피스로 전환하는 프로젝트였는데, 기존 부동산 컨설팅 업체와는 차원이 달랐습니다.
-          AI 예약 시스템과 클라우드 관리 도구를 도입하니 운영 인력을 절반으로 줄이면서도 고객 만족도가 올라갔습니다.
+          AI 예약 시스템과 클라우드 관리 도구를 도입한 뒤 운영 인력을 4명에서 2명으로 줄였고, 월 운영비를 약 32% 절감했습니다.
         </div>
         <div class="t-author">
           <div class="t-avatar">L</div>
@@ -486,6 +671,34 @@
           체계적인 컨설팅의 효과가 더욱 극대화됩니다.
         </div>
       </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          투자 회수(ROI) 목표는 어떻게 설정하나요?
+          <div class="faq-icon"><i class="fas fa-plus"></i></div>
+        </div>
+        <div class="faq-a">
+          초기 상담에서 예상 좌석 수, 평균 객단가, 공실률 가정, 운영비 구조를 기준으로 목표 회수기간을 먼저 정의합니다.
+          이후 월별 KPI(문의 전환율, 입주율, 객단가)를 추적해 계획 대비 편차를 관리합니다.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          상담 내용의 비밀유지(NDA)가 가능한가요?
+          <div class="faq-icon"><i class="fas fa-plus"></i></div>
+        </div>
+        <div class="faq-a">
+          가능합니다. 요청 시 미팅 전 상호 비밀유지계약(NDA)을 체결하고, 제공받은 수치 자료와 도면은 프로젝트 목적 외 사용하지 않습니다.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          계약 후 범위 변경이 생기면 어떻게 진행되나요?
+          <div class="faq-icon"><i class="fas fa-plus"></i></div>
+        </div>
+        <div class="faq-a">
+          단계별 계약 구조를 적용해 변경이 필요한 구간만 조정할 수 있습니다. 일정과 예산 영향도를 먼저 공유한 뒤 합의된 변경안으로 진행합니다.
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -503,11 +716,11 @@
         <h3>직접 연락하기</h3>
         <p>빠른 상담을 원하신다면 아래 채널로 직접 연락주세요. 영업일 기준 24시간 내 응답합니다.</p>
         <div class="contact-methods">
-          <a href="https://open.kakao.com" class="contact-method" target="_blank">
+          <a href="https://open.kakao.com" class="contact-method" target="_blank" rel="noopener">
             <i class="fas fa-comment"></i>
             <div>
               <div style="font-weight:600;margin-bottom:2px;">카카오톡 오픈채팅</div>
-              <div style="font-size:0.78rem;color:var(--gray-400);">가장 빠른 응답 채널</div>
+              <div style="font-size:0.78rem;color:var(--gray-400);">실제 채널 링크는 운영자 확인 후 즉시 교체 예정</div>
             </div>
           </a>
           <a href="mailto:hello@nextcowork.kr" class="contact-method">
@@ -603,6 +816,7 @@
       <div class="footer-col">
         <h4>바로가기</h4>
         <ul>
+          <li><a href="#spaces">적용 분야</a></li>
           <li><a href="#why">왜 NextCowork</a></li>
           <li><a href="#process">진행 프로세스</a></li>
           <li><a href="#credibility">실적</a></li>
